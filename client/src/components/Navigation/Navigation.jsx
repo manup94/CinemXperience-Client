@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 const Navigation = () => {
 
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="light" expand="lg" className='mb-5'>
             <Container>
                 <Navbar.Brand>
                     <Link to={'/'} className='nav-link'> CinemXperience </Link>
@@ -15,7 +15,7 @@ const Navigation = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Link to={'/sessions'} className='nav-link'> Sesiones </Link>
+                        <Link to={'/pass'} className='nav-link'> Sesiones </Link>
                         <Link to={'/combos'} className='nav-link'> Combos </Link>
                         <NavDropdown title="Auth" id="basic-nav-dropdown">
                             <NavDropdown.Item>
@@ -30,7 +30,7 @@ const Navigation = () => {
                         </NavDropdown>
                         <NavDropdown title="Admin" id="basic-nav-dropdown">
                             <NavDropdown.Item>
-                                <Link to={'/admin/session/create'} className='nav-link'> Nueva Sesion </Link>
+                                <Link to={'/admin/pass/create'} className='nav-link'> Nueva Sesión </Link>
                             </NavDropdown.Item>
                             <NavDropdown.Item>
                                 <Link to={'/admin/combo/create'} className='nav-link'> Nuevo Combo </Link>
