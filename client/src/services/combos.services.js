@@ -9,7 +9,6 @@ class ComboService {
         })
     }
 
-
     getCombos() {
         return this.api.get('/getAllCombos')
     }
@@ -17,6 +16,11 @@ class ComboService {
     getOneCombo(combo_id) {
         return this.api.get(`/${combo_id}/getOneCombo`)
     }
+
+    deleteCombo(combo_id) {
+        return this.api.delete(`/${combo_id}/delete`)
+    }
+
 
 }
 

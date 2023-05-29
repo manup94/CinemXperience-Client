@@ -15,8 +15,11 @@ const ComboDetailsPage = () => {
             .catch(err => console.log(err))
     }, [])
 
+
     return (
+
         <h1>party ------- {combo.snacks}</h1>
+
     )
 }
 

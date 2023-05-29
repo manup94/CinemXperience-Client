@@ -6,14 +6,18 @@ import ComboList from "../../components/ComboList/ComboList"
 
 const ComboListPage = () => {
 
-    const [combo, setCombo] = useState()
+    const [combo, setCombos] = useState()
 
-    useEffect(() => {
+    const fetchCombos = () => {
         comboService
             .getCombos()
-            .then(({ data }) => setCombo(data))
+            .then(({ data }) => setCombos(data))
             .catch((error) => console.log(error))
-    })
+    }
+
+    useEffect(() => {
+        fetchCombos()
+    }, [])
 
     return (
         <Container>
@@ -25,7 +29,7 @@ const ComboListPage = () => {
                         ?
                         <h1>Loading...</h1>
                         :
-                        <ComboList combo={combo} />
+                        <ComboList fetchCombos={fetchCombos} combo={combo} />
                 }
 
             </Row>
