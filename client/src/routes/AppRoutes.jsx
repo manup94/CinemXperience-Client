@@ -2,6 +2,8 @@ import { Routes, Route } from 'react-router-dom'
 import NewSessionPage from '../pages/NewPassPage/NewPassPage'
 import ComboListPage from '../pages/ComboListPage/ComboListPage'
 import ComboDetailsPage from '../pages/ComboDetailsPage/ComboDetailsPage'
+import SignupPage from '../pages/SignupPage/SignupPage'
+import LoginPage from '../pages/LoginPage/LoginPage'
 
 const AppRoutes = () => {
 
@@ -14,8 +16,8 @@ const AppRoutes = () => {
             <Route path='/order' element={<h1>tu cesta</h1>}> </Route>
             <Route path='/combos' element={<ComboListPage />}> </Route>
             <Route path='/combos/:combo_id' element={<ComboDetailsPage />}> </Route>
-            <Route path='/signup' element={<h1>Registrate o te empapelo</h1>}> </Route>
-            <Route path='/login' element={<h1>Me caes regular</h1>}> </Route>
+            <Route path='/signup' element={<SignupPage />}> </Route>
+            <Route path='/login' element={<LoginPage />}> </Route>
             <Route path='/logout' element={<h1>Tira</h1>}> </Route>
             <Route path='/profile' element={<h1>Juapo</h1>}> </Route>
             <Route path='/admin/pass/create' element={<NewSessionPage />}> </Route>

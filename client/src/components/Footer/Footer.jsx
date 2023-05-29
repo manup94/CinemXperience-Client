@@ -3,7 +3,7 @@ import './Footer.css'
 const Footer = () => {
 
     return (
-        <footer>el que lo lea es frances</footer>
+        <footer>Todo los derechos reservados</footer>
     )
 }
 
