@@ -21,14 +21,6 @@ const Navigation = () => {
                     <Nav className="me-auto">
                         <Link to={'/pass'} className='nav-link'> Sesiones </Link>
                         <Link to={'/combos'} className='nav-link'> Combos </Link>
-                        <NavDropdown title="Auth" id="basic-nav-dropdown">
-                            <NavDropdown.Item>
-                                <Link to={'/signup'} className='nav-link'> Registro </Link>
-                            </NavDropdown.Item>
-                            <NavDropdown.Item >
-                                <Link to={'/login'} className='nav-link'> Iniciar Sesion </Link>
-                            </NavDropdown.Item>
-                        </NavDropdown>
                         <NavDropdown title="Admin" id="basic-nav-dropdown">
                             <NavDropdown.Item>
                                 <Link to={'/admin/pass/create'} className='nav-link'> Nueva Sesión </Link>
@@ -42,7 +34,7 @@ const Navigation = () => {
                                 ?
                                 <>
                                     <NavDropdown.Item>
-                                        <Link to={'/logout'} onClick={logout} className='nav-link'> Logout </Link>
+                                        <Link onClick={logout} className='nav-link'> Logout </Link>
                                     </NavDropdown.Item>
                                     <Link to={'/profile'} className='nav-link'> hello there, {user.email}! </Link>
                                 </>
