@@ -8,7 +8,7 @@ const ProfilePage = () => {
 
     return (
         <Container>
-            <h1>hello there {user.email}</h1>
+            <h1>hello there {user.username}</h1>
         </Container>
     )
 }
