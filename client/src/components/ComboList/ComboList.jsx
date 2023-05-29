@@ -1,6 +1,6 @@
 import { Col } from "react-bootstrap"
 import ComboCard from "../ComboCard/ComboCard"
-import { useEffect, useState } from "react"
+import './ComboList.css'
 const ComboList = ({ combo, fetchCombos }) => {
 
 

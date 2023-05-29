@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import comboService from "../../services/combos.services"
 import { useNavigate } from "react-router-dom"
-
+import uploadServices from '../../services/upload.services';
 
 
 const NewComboForm = () => {
@@ -34,8 +34,21 @@ const NewComboForm = () => {
 
     }
 
+    const handleFileUpload = e => {
+
+        const formData = new FormData()
+        formData.append('image', e.target.files[0])
+
+        uploadServices
+            .uploadimage(formData)
+            .then(({ data }) => {
+                setComboData({ ...comboData, image: data.cloudinary_url })
+            })
+            .catch(err => console.log(err))
+    }
+
     return (
-        <Form encType="multipart/form-data" onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="name">
                 <Form.Label>Nombre</Form.Label>
                 <Form.Control type="text"
@@ -47,12 +60,8 @@ const NewComboForm = () => {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="image">
-                <Form.Label>Imagen:</Form.Label>
-                <Form.Control type="file"
-                    value={comboData.image}
-                    onChange={handleInputChange}
-                    name='image'
-                />
+                <Form.Label>Imagen (URL)</Form.Label>
+                <Form.Control type="file" onChange={handleFileUpload} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="snacks">
