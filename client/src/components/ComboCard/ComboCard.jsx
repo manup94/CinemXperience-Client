@@ -5,7 +5,7 @@ import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import './ComboCard.css'
 
 
-const ComboCard = ({ name, _id, fetchCombos, comboImg }) => {
+const ComboCard = ({ name, _id, fetchCombos, image }) => {
 
     const handleClick = () => {
         comboService
@@ -16,7 +16,7 @@ const ComboCard = ({ name, _id, fetchCombos, comboImg }) => {
 
     return (
         <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={comboImg} />
+            <Card.Img variant="top" src={image} />
             <Card.Body>
                 <Card.Title>{name}</Card.Title>
                 <Link to={`/combos/${_id}`} className='btn btn-dark btn-sm'>Detalles</Link>

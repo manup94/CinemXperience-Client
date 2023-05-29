@@ -26,15 +26,16 @@ const NewComboForm = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
+
         comboService
             .createCombo(comboData)
-            .then(({ data }) => navigate('/profile'))
+            .then(({ data }) => navigate('/combos'))
             .catch(err => console.log(err))
 
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form encType="multipart/form-data" onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="name">
                 <Form.Label>Nombre</Form.Label>
                 <Form.Control type="text"
@@ -47,7 +48,7 @@ const NewComboForm = () => {
 
             <Form.Group className="mb-3" controlId="image">
                 <Form.Label>Imagen:</Form.Label>
-                <Form.Control type="string"
+                <Form.Control type="file"
                     value={comboData.image}
                     onChange={handleInputChange}
                     name='image'

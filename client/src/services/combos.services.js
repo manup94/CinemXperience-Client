@@ -21,8 +21,8 @@ class ComboService {
         return this.api.delete(`/${combo_id}/delete`)
     }
 
-    createCombo() {
-        return this.api.post('/createNewCombo')
+    createCombo(comboData) {
+        return this.api.post('/createNewCombo', comboData)
     }
 
 
