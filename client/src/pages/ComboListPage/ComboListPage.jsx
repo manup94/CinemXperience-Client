@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import comboService from "../../services/combos.services"
-import { Col, Container, Row } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
 import ComboList from "../../components/ComboList/ComboList"
 
 const ComboListPage = () => {

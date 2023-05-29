@@ -5,6 +5,8 @@ import ComboListPage from '../pages/ComboListPage/ComboListPage'
 import ComboDetailsPage from '../pages/ComboDetailsPage/ComboDetailsPage'
 import SignupPage from '../pages/SignupPage/SignupPage'
 import LoginPage from '../pages/LoginPage/LoginPage'
+import ProfilePage from '../pages/ProfilePage/ProfilePage'
+import PrivateRoute from './PrivateRoute'
 
 const AppRoutes = () => {
 
@@ -19,8 +21,9 @@ const AppRoutes = () => {
             <Route path='/combos/:combo_id' element={<ComboDetailsPage />}> </Route>
             <Route path='/signup' element={<SignupPage />}> </Route>
             <Route path='/login' element={<LoginPage />}> </Route>
-            <Route path='/logout' element={<h1>Tira</h1>}> </Route>
-            <Route path='/profile' element={<h1>Juapo</h1>}> </Route>
+            <Route path='/profile' element={<PrivateRoute />}>
+                <Route path='' element={<ProfilePage />}> </Route>
+            </Route>
             <Route path='/admin/pass/create' element={<NewSessionPage />}> </Route>
             <Route path='/admin/pass/edit' element={<h1>Pirata</h1>}> </Route>
             <Route path='/admin/pass/delete' element={<h1>Pirata</h1>}> </Route>

@@ -34,7 +34,7 @@ const Navigation = () => {
                                 ?
                                 <>
                                     <NavDropdown.Item>
-                                        <Link to={'/logout'} onClick={logout} className='nav-link'> Logout </Link>
+                                        <Link onClick={logout} className='nav-link'> Logout </Link>
                                     </NavDropdown.Item>
                                     <Link to={'/profile'} className='nav-link'> hello there, {user.email}! </Link>
                                 </>
