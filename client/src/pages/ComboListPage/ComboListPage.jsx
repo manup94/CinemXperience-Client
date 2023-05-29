@@ -12,13 +12,10 @@ const ComboListPage = () => {
             .getCombos()
             .then(({ data }) => setCombos(data))
             .catch((error) => console.log(error))
-<<<<<<< HEAD
     }
 
     useEffect(() => {
         fetchCombos()
-=======
->>>>>>> b4a5f9dded50a8a442ef2a5f759634472a08ba77
     }, [])
 
     return (

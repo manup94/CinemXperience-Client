@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import NewSessionPage from '../pages/NewPassPage/NewPassPage'
+import NewComboPage from '../pages/NewComboPage/NewComboPage'
 import ComboListPage from '../pages/ComboListPage/ComboListPage'
 import ComboDetailsPage from '../pages/ComboDetailsPage/ComboDetailsPage'
 import SignupPage from '../pages/SignupPage/SignupPage'
@@ -23,7 +24,7 @@ const AppRoutes = () => {
             <Route path='/admin/pass/create' element={<NewSessionPage />}> </Route>
             <Route path='/admin/pass/edit' element={<h1>Pirata</h1>}> </Route>
             <Route path='/admin/pass/delete' element={<h1>Pirata</h1>}> </Route>
-            <Route path='/admin/combo/create' element={<h1>Garrapata</h1>}> </Route>
+            <Route path='/admin/combo/create' element={<NewComboPage />}> </Route>
             <Route path='/admin/combo/edit' element={<h1>Garrapata</h1>}> </Route>
             <Route path='/admin/combo/delete' element={<h1>Garrapata</h1>}> </Route>
         </Routes>
