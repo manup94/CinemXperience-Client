@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import comboService from "../../services/combos.services"
 import { Col, Container, Row } from 'react-bootstrap'
-import ComboCard from "../../components/ComboCard/ComboCard"
 import ComboList from "../../components/ComboList/ComboList"
 
 const ComboListPage = () => {
@@ -13,7 +12,7 @@ const ComboListPage = () => {
             .getCombos()
             .then(({ data }) => setCombo(data))
             .catch((error) => console.log(error))
-    })
+    }, [])
 
     return (
         <Container>
