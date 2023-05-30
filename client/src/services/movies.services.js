@@ -13,6 +13,12 @@ class MoviesService {
         return this.api.get('/list')
     }
 
+    getOneMovie(id) {
+        return this.api.get(`/movie/${id}`);
+    }
+
+
+
 
 
 }

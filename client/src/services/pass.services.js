@@ -9,6 +9,9 @@ class PassService {
         })
     }
 
+    createPass(passData) {
+        return this.api.post('/createNewPass', passData)
+    }
 
 
 
