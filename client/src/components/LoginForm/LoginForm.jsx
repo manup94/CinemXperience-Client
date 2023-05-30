@@ -3,6 +3,7 @@ import { Form, Button } from "react-bootstrap"
 import authService from './../../services/auth.services'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from "../../context/auth.context"
+import FormError from "../FormError/FormError"
 
 const LoginForm = () => {
 
@@ -31,7 +32,9 @@ const LoginForm = () => {
                 authenticateUser()
                 navigate('/')
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                setErrors(err.response.data.errorMessages)
+            })
     }
 
 
@@ -51,6 +54,7 @@ const LoginForm = () => {
                 <Form.Label>Contraseña</Form.Label>
                 <Form.Control type="password" value={password} onChange={handleInputChange} name="password" />
             </Form.Group>
+
 
             <div className="d-grid">
                 <Button variant="dark" type="submit">Acceder</Button>

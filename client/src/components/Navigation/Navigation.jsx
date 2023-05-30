@@ -37,8 +37,12 @@ const Navigation = () => {
                         <Link to={'/pass'} className='nav-link'> Sesiones </Link>
                         <Link to={'/combos'} className='nav-link'> Combos </Link>
                         <NavDropdown title="Admin" id="basic-nav-dropdown" className="custom-nav-dropdown">
-                            <Link to={'/admin/pass/create'} className='dropdown-item'> Nueva Sesión </Link>
-                            <Link to={'/admin/combo/create'} className='dropdown-item'> Nuevo Combo </Link>
+                            <NavDropdown.Item>
+                                <Link to={'/admin/pass/create'} className='dropdown-item'> Nueva Sesión </Link>
+                            </NavDropdown.Item>
+                            <NavDropdown.Item>
+                                <Link to={'/admin/combo/create'} className='dropdown-item'> Nuevo Combo </Link>
+                            </NavDropdown.Item>
                         </NavDropdown>
                         {
                             user
@@ -52,8 +56,12 @@ const Navigation = () => {
                                 :
                                 <>
                                     <NavDropdown title="Auth" id="basic-nav-dropdown" className="custom-nav-dropdown">
-                                        <Link to={'/signup'} className='dropdown-item'> Registro </Link>
-                                        <Link to={'/login'} className='dropdown-item'> Iniciar Sesion </Link>
+                                        <NavDropdown.Item>
+                                            <Link to={'/signup'} className='dropdown-item'> Registro </Link>
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item>
+                                            <Link to={'/login'} className='dropdown-item'> Iniciar Sesion </Link>
+                                        </NavDropdown.Item>
                                     </NavDropdown>
                                 </>
                         }
