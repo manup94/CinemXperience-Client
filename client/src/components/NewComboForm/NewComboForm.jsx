@@ -1,14 +1,17 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import comboService from "../../services/combos.services"
 import { useNavigate } from "react-router-dom"
 import uploadServices from '../../services/upload.services';
+import FormError from '../FormError/FormError';
+import { MessageContext } from '../../context/message.context';
 
 
 const NewComboForm = () => {
 
     const navigate = useNavigate()
+    const [errors, setErrors] = useState([])
 
 
     const [comboData, setComboData] = useState({
@@ -18,6 +21,8 @@ const NewComboForm = () => {
         drinks: '',
         price: ''
     })
+
+    const { emitMessage } = useContext(MessageContext)
 
     const handleInputChange = e => {
         const { name, value } = e.target
@@ -29,8 +34,13 @@ const NewComboForm = () => {
 
         comboService
             .createCombo(comboData)
-            .then(({ data }) => navigate('/combos'))
-            .catch(err => console.log(err))
+            .then(({ data }) => {
+                navigate('/combos')
+                emitMessage('Se ha creado un nuevo combo')
+            })
+            .catch(err => {
+                setErrors(err.response.data.errorMessages)
+            })
 
     }
 
@@ -90,6 +100,8 @@ const NewComboForm = () => {
                     name='price'
                 />
             </Form.Group>
+
+            {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
             <Button variant="primary" type="submit">
                 Crear
             </Button>
