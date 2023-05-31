@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import moviesService from '../../services/movies.services';
 import passService from '../../services/pass.services';
 import { useNavigate } from "react-router-dom"
+import FormError from '../FormError/FormError';
 
 
 
@@ -14,6 +15,8 @@ const NewPassForm = () => {
     });
 
     const navigate = useNavigate()
+
+    const [errors, setErrors] = useState([])
 
     const [movieTitles, setMovieTitles] = useState([]);
 
@@ -42,7 +45,9 @@ const NewPassForm = () => {
             .then(() => {
                 console.log('Pase creado exitosamente');
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                setErrors(err.response.data.errorMessages)
+            });
 
 
     };
@@ -85,6 +90,9 @@ const NewPassForm = () => {
                     name="movieDate"
                 />
             </Form.Group>
+
+            {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
+
             <Button variant="primary" type="submit">
                 Crear
             </Button>

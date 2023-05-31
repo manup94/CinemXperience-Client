@@ -7,6 +7,8 @@ import FormError from "../FormError/FormError"
 
 const LoginForm = () => {
 
+    const [errors, setErrors] = useState([])
+
     const [loginData, setLoginData] = useState({
         email: '',
         password: ''
@@ -59,6 +61,8 @@ const LoginForm = () => {
             <div className="d-grid">
                 <Button variant="dark" type="submit">Acceder</Button>
             </div>
+
+            {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
 
         </Form>
     )

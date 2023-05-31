@@ -8,7 +8,6 @@ function AuthProviderWrapper(props) {
 
     const [user, setUser] = useState()
     const [isLoading, setIsLoading] = useState(true)
-
     useEffect(() => {
         authenticateUser()
     }, [])
@@ -43,7 +42,6 @@ function AuthProviderWrapper(props) {
             logout()
         }
     }
-
 
     return (
         <AuthContext.Provider value={{ user, authenticateUser, storeToken, logout, isLoading }}>
