@@ -25,13 +25,19 @@ const AppRoutes = () => {
             <Route path='/combos/:combo_id' element={<ComboDetailsPage />}> </Route>
             <Route path='/signup' element={<SignupPage />}> </Route>
             <Route path='/login' element={<LoginPage />}> </Route>
-            <Route path='/profile' element={<PrivateRoute />}>
-                <Route path='' element={<ProfilePage />}> </Route>
+
+            <Route path='' element={<PrivateRoute admittedRoles={['USER']} />}>
+                <Route path='/profile' element={<ProfilePage />}> </Route>
             </Route>
-            <Route path='/admin/pass/create' element={<NewSessionPage />}> </Route>
-            <Route path='/admin/pass/edit' element={<h1>Pirata</h1>}> </Route>
-            <Route path='/admin/pass/delete' element={<h1>Pirata</h1>}> </Route>
-            <Route path='/admin/combo/create' element={<NewComboPage />}> </Route>
+
+            <Route path='' element={<PrivateRoute admittedRoles={['ADMIN']} />} >
+                <Route path='/admin/pass/create' element={<NewSessionPage />}> </Route>
+                <Route path='/admin/pass/edit' element={<h1>Pirata</h1>}> </Route>
+                <Route path='/admin/pass/delete' element={<h1>Pirata</h1>}> </Route>
+                <Route path='/admin/combo/create' element={<NewComboPage />}> </Route>
+                <Route path='/admin/combo/edit' element={<h1>Garrapata</h1>}> </Route>
+                <Route path='/admin/combo/delete' element={<h1>Garrapata</h1>}> </Route>
+            </Route>
         </Routes>
     )
 }

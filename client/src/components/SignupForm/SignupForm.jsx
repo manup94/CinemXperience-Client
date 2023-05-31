@@ -14,6 +14,7 @@ const SignupForm = () => {
 
     const navigate = useNavigate()
 
+    const [errors, setErrors] = useState([])
 
     const handleInputChange = e => {
         const { value, name } = e.target
@@ -58,6 +59,7 @@ const SignupForm = () => {
             <div className="d-grid">
                 <Button variant="dark" type="submit">Registrarme</Button>
             </div>
+            {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
 
         </Form>
     )

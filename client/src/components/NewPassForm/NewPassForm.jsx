@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import moviesService from '../../services/movies.services';
 import passService from '../../services/pass.services';
 import { useNavigate } from "react-router-dom"
-import { MessageContext } from '../../context/message.context';
+import FormError from '../FormError/FormError';
 
 
 
@@ -17,6 +17,8 @@ const NewPassForm = () => {
     const { emitMessage } = useContext(MessageContext)
 
     const navigate = useNavigate()
+
+    const [errors, setErrors] = useState([])
 
     const [movieTitles, setMovieTitles] = useState([]);
 
@@ -46,7 +48,9 @@ const NewPassForm = () => {
                 navigate('/pass')
                 emitMessage('Se ha creado una nueva sesion')
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                setErrors(err.response.data.errorMessages)
+            });
 
 
     };
@@ -89,6 +93,9 @@ const NewPassForm = () => {
                     name="movieDate"
                 />
             </Form.Group>
+
+            {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
+
             <Button variant="primary" type="submit">
                 Crear
             </Button>

@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { AuthContext } from './../context/auth.context'
 import { Navigate, Outlet } from 'react-router-dom'
 
-const PrivateRoute = () => {
+const PrivateRoute = ({ admittedRoles }) => {
 
     const { user, isLoading } = useContext(AuthContext)
 
@@ -12,6 +12,11 @@ const PrivateRoute = () => {
 
     if (!user) {
         return <Navigate to="/login" />
+    }
+
+    if (!admittedRoles.includes(user.role)) {
+
+        return <h1>User not allowed</h1>
     }
 
     return <Outlet />

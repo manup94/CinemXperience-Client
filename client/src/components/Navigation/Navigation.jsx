@@ -15,11 +15,6 @@ const Navigation = () => {
 
     const { theme, switchTheme } = useContext(ThemeContext)
 
-    const themeStyle = {
-        backgroundColor: theme === 'dark' ? 'rgb(248 249 250)' : '#212429',
-        color: theme === 'dark' ? 'black' : 'white',
-    }
-
     const variant = theme === 'light' ? 'dark' : 'light'
 
 
@@ -36,14 +31,23 @@ const Navigation = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Link to={'/combos'} className='nav-link'> Combos </Link>
-                        <NavDropdown title="Admin" id="basic-nav-dropdown" className="custom-nav-dropdown">
-                            <NavDropdown.Item>
-                                <Link to={'/admin/pass/create'} className='dropdown-item'> Nueva Sesión </Link>
-                            </NavDropdown.Item>
-                            <NavDropdown.Item>
-                                <Link to={'/admin/combo/create'} className='dropdown-item'> Nuevo Combo </Link>
-                            </NavDropdown.Item>
-                        </NavDropdown>
+                        {
+                            user?.role === 'ADMIN'
+                                ?
+                                <>
+                                    <NavDropdown title="Admin" id="basic-nav-dropdown" className="custom-nav-dropdown">
+                                        <NavDropdown.Item>
+                                            <Link to={'/admin/pass/create'} className='dropdown-item'> Nueva Sesión </Link>
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item>
+                                            <Link to={'/admin/combo/create'} className='dropdown-item'> Nuevo Combo </Link>
+                                        </NavDropdown.Item>
+                                    </NavDropdown>
+                                </>
+                                :
+                                <>
+                                </>
+                        }
                         {
                             user
                                 ?
