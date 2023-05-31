@@ -1,11 +1,12 @@
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, Accordion } from 'react-bootstrap';
+import './ComboCard.css'
 import { Link } from 'react-router-dom';
 import comboService from "../../services/combos.services"
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
-import './ComboCard.css'
+import * as HoverCard from '@radix-ui/react-hover-card';
 
 
-const ComboCard = ({ name, _id, fetchCombos, image }) => {
+const ComboCard = ({ name, snacks, drinks, _id, fetchCombos, price, image }) => {
 
     const handleClick = () => {
         comboService
@@ -15,38 +16,84 @@ const ComboCard = ({ name, _id, fetchCombos, image }) => {
     };
 
     return (
+
         <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={image} />
-            <Card.Body>
-                <Card.Title>{name}</Card.Title>
-                <Link to={`/combos/${_id}`} className='btn btn-dark btn-sm'>Detalles</Link>
-                <AlertDialog.Root>
-                    <AlertDialog.Trigger asChild>
-                        <Button className='btn btn-danger btn-sm' >Delete</Button>
-                    </AlertDialog.Trigger>
-                    <AlertDialog.Portal>
-                        < AlertDialog.Overlay className="overlay" />
-                        <AlertDialog.Content className="content">
-                            <AlertDialog.Title className="AlertDialogTitle">¿Estas completamente seguro?</AlertDialog.Title>
-                            <AlertDialog.Description className="AlertDialogDescription">
-                                Esta accion no se puede deshacer, se eliminara completamente de la base de datos
-                            </AlertDialog.Description>
-                            <div style={{ display: 'flex', gap: 25, justifyContent: 'flex-end' }}>
-                                <AlertDialog.Cancel asChild>
-                                    <Button variant="dark" >Cancel</Button >
-                                </AlertDialog.Cancel>
-                                <AlertDialog.Action asChild>
-                                    <Button variant="danger" onClick={handleClick} >Si, eliminar combo</Button>
-                                </AlertDialog.Action>
+
+            <HoverCard.Root openDelay={0} closeDelay={0}>
+                <HoverCard.Trigger asChild>
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Img className='card-image' variant="top" src={image} />
+                        <Card.Body className='title-bg'>
+                            <Card.Title className='title'>{name}</Card.Title>
+                        </Card.Body>
+                    </Card>
+
+                </HoverCard.Trigger>
+                <HoverCard.Portal>
+                    <HoverCard.Content className="HoverCardContent" sideOffset={5}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+                            <div className='header-card'>
+                                <img
+                                    className="Image large"
+                                    src={image}
+                                    alt="Radix UI"
+                                />
+
+                                <div className="Text bolder">{name}</div>
+
+
                             </div>
-                        </AlertDialog.Content>
-                    </AlertDialog.Portal>
-                </AlertDialog.Root>
-            </Card.Body>
+
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: 15 }}>
+
+                                <div className="Text">
+                                    Disfruta de nuestro servicio VIP , te lo llevamos a tu asiento.
+                                    <p>- {snacks}</p>
+                                    <p>- {drinks}</p>
+                                </div>
+                                <div style={{ display: 'flex', gap: 15 }}>
+                                    <div style={{ display: 'flex', gap: 5 }}>
+                                        <div className="Text bold">Precio: {price}€</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <HoverCard.Arrow className="HoverCardArrow" />
+                    </HoverCard.Content>
+                </HoverCard.Portal>
+            </HoverCard.Root>
+
+            <AlertDialog.Root>
+                <AlertDialog.Trigger asChild>
+                    <Button className='btn btn-danger btn-sm' >Delete</Button>
+                </AlertDialog.Trigger>
+                <AlertDialog.Portal>
+                    < AlertDialog.Overlay className="overlay" />
+                    <AlertDialog.Content className="content">
+                        <AlertDialog.Title className="AlertDialogTitle">¿Estas completamente seguro?</AlertDialog.Title>
+                        <AlertDialog.Description className="AlertDialogDescription">
+                            Esta accion no se puede deshacer, se eliminara completamente de la base de datos
+                        </AlertDialog.Description>
+                        <div style={{ display: 'flex', gap: 25, justifyContent: 'flex-end' }}>
+                            <AlertDialog.Cancel asChild>
+                                <Button variant="dark" >Cancel</Button >
+                            </AlertDialog.Cancel>
+                            <AlertDialog.Action asChild>
+                                <Button variant="danger" onClick={handleClick} >Si, eliminar combo</Button>
+                            </AlertDialog.Action>
+                        </div>
+                    </AlertDialog.Content>
+                </AlertDialog.Portal>
+            </AlertDialog.Root>
+
         </Card>
     );
 }
 
 export default ComboCard;
+
+
+
 
 

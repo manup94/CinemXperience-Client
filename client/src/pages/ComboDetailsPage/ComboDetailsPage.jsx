@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router"
 import comboService from "../../services/combos.services"
+import { Col, Container, Row } from "react-bootstrap"
+import './ComboDetailsPage.css'
 
 const ComboDetailsPage = () => {
 
@@ -17,8 +19,29 @@ const ComboDetailsPage = () => {
 
 
     return (
+        <Container className="d-flex">
+            <Col >
+                <Row>
+                    < img className="img" src={combo.image} alt="" />
+                </Row>
 
-        <h1>party ------- {combo.snacks}</h1>
+            </Col>
+            <Col className="details-container">
+                <Row>
+                    <h1>party{combo.name}</h1>
+                    <ul>
+                        <li>{combo.snacks}</li>
+                        <li>{combo.drinks}</li>
+                        <li>{combo.price} €</li>
+                    </ul>
+
+                </Row>
+
+            </Col>
+
+
+        </Container>
+
 
     )
 }

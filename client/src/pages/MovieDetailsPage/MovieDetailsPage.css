@@ -1,0 +1,37 @@
+.image {
+    width: 70%;
+}
+
+.img-container {
+    width: 70%;
+}
+
+.text-container {
+    padding: 15px;
+    background: black;
+    color: white;
+    border-radius: 12px;
+}
+
+.movie-details {
+
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.sesions-form {
+    width: 70%;
+    margin-top: 30px;
+    display: flex;
+}
+
+.sesions-form-btn {
+    margin-left: 40px;
+}
+
+.text {
+    margin: 15px;
+}

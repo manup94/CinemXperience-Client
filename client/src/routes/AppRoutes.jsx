@@ -7,15 +7,19 @@ import SignupPage from '../pages/SignupPage/SignupPage'
 import LoginPage from '../pages/LoginPage/LoginPage'
 import ProfilePage from '../pages/ProfilePage/ProfilePage'
 import PrivateRoute from './PrivateRoute'
+import PassListPage from '../pages/PassListPage/PassListPage'
+import IndexPage from '../pages/IndexPage/IndexPage'
+import MovieDetailsPage from '../pages/MovieDetailsPage/MovieDetailsPage'
 
 const AppRoutes = () => {
 
     return (
         <Routes>
-            <Route path='/' element={<h1>Hello there</h1>}> </Route>
-            <Route path='/pass' element={<h1>Sesiones aqui</h1>}> </Route>
+            <Route path='/' element={<IndexPage></IndexPage>}> </Route>
+            {/* <Route path='/pass' element={<PassListPage />}> </Route> */}
             <Route path='/pass/:id' element={<h1>Sesiones especifica</h1>}> </Route>
             <Route path='/pass/:id/buy' element={<h1>Sesiones Compra</h1>}> </Route>
+            <Route path='/movies/:movie_id' element={<MovieDetailsPage />}> </Route>
             <Route path='/order' element={<h1>tu cesta</h1>}> </Route>
             <Route path='/combos' element={<ComboListPage />}> </Route>
             <Route path='/combos/:combo_id' element={<ComboDetailsPage />}> </Route>
@@ -28,8 +32,6 @@ const AppRoutes = () => {
             <Route path='/admin/pass/edit' element={<h1>Pirata</h1>}> </Route>
             <Route path='/admin/pass/delete' element={<h1>Pirata</h1>}> </Route>
             <Route path='/admin/combo/create' element={<NewComboPage />}> </Route>
-            <Route path='/admin/combo/edit' element={<h1>Garrapata</h1>}> </Route>
-            <Route path='/admin/combo/delete' element={<h1>Garrapata</h1>}> </Route>
         </Routes>
     )
 }

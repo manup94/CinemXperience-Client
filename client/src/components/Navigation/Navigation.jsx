@@ -6,6 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom'
 import { AuthContext } from './../../context/auth.context'
 import { ThemeContext } from '../../context/theme.context';
+import * as Switch from '@radix-ui/react-switch';
 import './Navigation.css'
 
 const Navigation = () => {
@@ -26,7 +27,7 @@ const Navigation = () => {
     return (
 
 
-        <Navbar bg={variant} variant={variant} expand="lg" className='mb-5'>
+        <Navbar bg={variant} variant={variant} expand="lg" className=' mb-0'>
             <Container>
                 <Navbar.Brand>
                     <Link to={'/'} className='nav-link'> CinemXperience </Link>
@@ -34,7 +35,6 @@ const Navigation = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Link to={'/pass'} className='nav-link'> Sesiones </Link>
                         <Link to={'/combos'} className='nav-link'> Combos </Link>
                         <NavDropdown title="Admin" id="basic-nav-dropdown" className="custom-nav-dropdown">
                             <NavDropdown.Item>
@@ -67,9 +67,16 @@ const Navigation = () => {
                         }
                     </Nav>
                     <div className='justify-content-end'>
-                        <Navbar.Text onClick={switchTheme}>
-                            {theme === 'dark' ? 'Tema claro' : 'Tema oscuro'}
-                        </Navbar.Text>
+                        <form>
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <label className="Label" htmlFor="airplane-mode" style={{ paddingRight: 15 }}>
+                                    Modo Dia
+                                </label>
+                                <Switch.Root onClick={switchTheme} className="SwitchRoot" id="airplane-mode">
+                                    <Switch.Thumb className="SwitchThumb"> </Switch.Thumb>
+                                </Switch.Root>
+                            </div>
+                        </form>
                     </div>
                 </Navbar.Collapse>
             </Container>

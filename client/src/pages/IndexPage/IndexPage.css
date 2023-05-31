@@ -1,0 +1,27 @@
+.carrousel-img {
+
+    height: 450px
+}
+
+.carrousel-all {
+    width: 20%;
+}
+
+.carrousel-container {
+    background: black;
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.text-container {
+    width: 30%;
+    font-size: 1.2em;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.slogan {
+    margin-top: 30px;
+}

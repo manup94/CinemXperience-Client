@@ -27,7 +27,7 @@ const SignupForm = () => {
             .signup(signupData)
             .then(({ data }) => navigate('/profile'))
             .catch(err => {
-                setErrors(err.response.data.errorMessages)
+                console.log(err);
             })
     }
 

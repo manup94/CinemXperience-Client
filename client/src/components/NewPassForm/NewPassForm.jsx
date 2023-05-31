@@ -1,9 +1,10 @@
-import { useState, useEffect, Children } from 'react';
+import { useState, useContext, useEffect, Children } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import moviesService from '../../services/movies.services';
 import passService from '../../services/pass.services';
 import { useNavigate } from "react-router-dom"
+import { MessageContext } from '../../context/message.context';
 
 
 
@@ -12,6 +13,8 @@ const NewPassForm = () => {
         movieId: '',
         movieDate: ''
     });
+
+    const { emitMessage } = useContext(MessageContext)
 
     const navigate = useNavigate()
 
@@ -40,7 +43,8 @@ const NewPassForm = () => {
                 movieId: Number(passData.movieId)
             })
             .then(() => {
-                console.log('Pase creado exitosamente');
+                navigate('/pass')
+                emitMessage('Se ha creado una nueva sesion')
             })
             .catch(err => console.log(err));
 
