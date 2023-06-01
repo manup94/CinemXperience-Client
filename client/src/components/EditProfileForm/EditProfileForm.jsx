@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Form, Button } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
-import authService from './../../services/auth.services'
+import authService from '../../services/auth.services'
 import FormError from "../FormError/FormError"
 import uploadServices from '../../services/upload.services';
 
@@ -57,12 +57,6 @@ const SignupForm = () => {
             <Form.Group className="mb-3" controlId="username">
                 <Form.Label>Nombre de usuario</Form.Label>
                 <Form.Control type="text" value={username} onChange={handleInputChange} name="username" />
-            </Form.Group>
-
-
-            <Form.Group className="mb-3" controlId="password">
-                <Form.Label>Contraseña</Form.Label>
-                <Form.Control type="password" value={password} onChange={handleInputChange} name="password" />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="image">
