@@ -10,6 +10,8 @@ const EditProfileForm = () => {
 
     const { profile_id } = useParams()
 
+    const [loadingImage, setLoadingImage] = useState(false)
+
     const [editProfileData, setEditProfileData] = useState({
         username: '',
         email: '',
@@ -43,12 +45,14 @@ const EditProfileForm = () => {
 
     const loadUser = () => {
         profileService
-            .editOneProfile(profile_id)
+            .getOneProfile(profile_id)
             .then(({ data }) => setEditProfileData(data))
             .catch(err => console.log(err))
     }
 
     const handleFileUpload = e => {
+
+        setLoadingImage(true)
 
         const formData = new FormData()
         formData.append('image', e.target.files[0])
@@ -57,7 +61,9 @@ const EditProfileForm = () => {
             .uploadimage(formData)
             .then(({ data }) => {
                 setEditProfileData({ ...editProfileData, avatar: data.cloudinary_url })
+                setLoadingImage(false)
             })
+
             .catch(err => console.log(err))
     }
 
@@ -84,7 +90,7 @@ const EditProfileForm = () => {
             </Form.Group>
 
             <div className="d-grid">
-                <Button variant="dark" type="submit">Editar información</Button>
+                <Button variant="dark" type="submit" disabled={loadingImage}>{loadingImage ? 'Loading Image...' : 'Editar información'}</Button>
             </div>
             {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
 
