@@ -10,13 +10,13 @@ import PrivateRoute from './PrivateRoute'
 import PassListPage from '../pages/PassListPage/PassListPage'
 import IndexPage from '../pages/IndexPage/IndexPage'
 import MovieDetailsPage from '../pages/MovieDetailsPage/MovieDetailsPage'
+import EditProfileForm from '../pages/ProfileEditPage/ProfileEditPage'
 
 const AppRoutes = () => {
 
     return (
         <Routes>
             <Route path='/' element={<IndexPage></IndexPage>}> </Route>
-            {/* <Route path='/pass' element={<PassListPage />}> </Route> */}
             <Route path='/pass/:id' element={<h1>Sesiones especifica</h1>}> </Route>
             <Route path='/pass/:id/buy' element={<h1>Sesiones Compra</h1>}> </Route>
             <Route path='/movies/:movie_id' element={<MovieDetailsPage />}> </Route>
@@ -26,12 +26,14 @@ const AppRoutes = () => {
             <Route path='/signup' element={<SignupPage />}> </Route>
             <Route path='/login' element={<LoginPage />}> </Route>
 
-            <Route path='' element={<PrivateRoute admittedRoles={['USER']} />}>
+            <Route path='' element={<PrivateRoute admittedRoles={['USER', 'ADMIN']} />}>
                 <Route path='/profile' element={<ProfilePage />}> </Route>
+                <Route path='/profile/:profile_id/edit' element={<EditProfileForm />}> </Route>
             </Route>
 
             <Route path='' element={<PrivateRoute admittedRoles={['ADMIN']} />} >
                 <Route path='/admin/pass/create' element={<NewSessionPage />}> </Route>
+                <Route path='/admin/pass' element={<PassListPage />}> </Route>
                 <Route path='/admin/pass/edit' element={<h1>Pirata</h1>}> </Route>
                 <Route path='/admin/pass/delete' element={<h1>Pirata</h1>}> </Route>
                 <Route path='/admin/combo/create' element={<NewComboPage />}> </Route>
