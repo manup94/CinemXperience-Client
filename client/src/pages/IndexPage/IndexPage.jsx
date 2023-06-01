@@ -54,7 +54,7 @@ const IndexPage = () => {
                                 {
                                     sliderMovies.map(elm => {
                                         return (
-                                            <Carousel.Item key={elm.id} className='carrousel-img'>
+                                            <Carousel.Item key={elm._id} className='carrousel-img'>
                                                 <Link to={`/movies/${elm.id}`} >
                                                     <img
                                                         className="d-block w-100  "

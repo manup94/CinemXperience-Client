@@ -12,6 +12,10 @@ class ProfileService {
     getOneProfile(profile_id) {
         return this.api.get(`/${profile_id}/getOneProfile`)
     }
+
+    getPack(profile_id, tiket, combo) {
+        return this.api.get(`/${profile_id}/getTickets`)
+    }
 }
 
 const profileService = new ProfileService()

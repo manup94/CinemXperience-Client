@@ -14,10 +14,10 @@ const ProfilePage = () => {
 
 
     useEffect(() => {
-        userInfo()
+        getUserInfo()
     }, [])
 
-    const userInfo = () => {
+    const getUserInfo = () => {
         profileService
             .getOneProfile(user._id)
             .then(({ data }) => setProfile(data))

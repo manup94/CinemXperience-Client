@@ -11,6 +11,10 @@ const PassListPage = () => {
 
     const [passes, setPasses] = useState()
 
+    useEffect(() => {
+        fetchPasses()
+    }, [])
+
     const fetchPasses = () => {
         passService
             .getAllPass()
@@ -18,9 +22,6 @@ const PassListPage = () => {
             .catch((error) => console.log(error))
     }
 
-    useEffect(() => {
-        fetchPasses()
-    }, [])
 
     return (
         <Container>

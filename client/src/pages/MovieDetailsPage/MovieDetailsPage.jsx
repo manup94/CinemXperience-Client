@@ -3,12 +3,14 @@ import { useParams } from "react-router"
 import passServices from '../../services/pass.services'
 import moviesServices from '../../services/movies.services'
 import comboService from '../../services/combos.services'
+import profileServices from '../../services/profile.services'
 import { Col, Container, Row, Button, Form, Modal } from "react-bootstrap"
 import './MovieDetailsPage.css'
 import ComboList from '../../components/ComboList/ComboList'
 import ComboCard from "../../components/ComboCard/ComboCard"
 import * as Select from '@radix-ui/react-select';
 import { AuthContext } from "../../context/auth.context"
+import { useIsRTL } from "react-bootstrap/esm/ThemeProvider"
 const { formatDate } = require('../../utils/formatDate');
 
 
@@ -29,23 +31,31 @@ const MovieDetailsPage = () => {
 
     const [combo, setCombos] = useState()
 
+    useEffect(() => {
+        oneMovieFetch()
+        passFetch()
+        fetchCombos()
+    }, [])
 
     const handleClose = () => setShow(false);
+
     const handleShow = (e) => {
         e.preventDefault()
-        console.log(user._id);
         setShow(true)
     }
 
-    const fetchUser = () => {
+    const getPack = () => {
 
+        profileServices
+            .getPack(user._id)
+            .then(res => console.log('compra realizada', res))
+            .catch(err => console.log(err))
     }
 
     const fetchCombos = () => {
         comboService
             .getCombos()
-            .then(({ data }) => setCombos(data)
-            )
+            .then(({ data }) => setCombos(data))
             .catch((error) => console.log(error))
     }
 
@@ -55,28 +65,18 @@ const MovieDetailsPage = () => {
             .then(({ data }) => setMovie(data))
             .catch(err => console.log(err))
     }
+
     const passFetch = () => {
+
+        // TODO: CREAR SERVICIO GETPASSESBYMOVIE
         passServices
             .getAllPass()
             .then((res) => {
-                const passes = res.data.filter(elm => {
-                    return elm.movieInfo.id == movie_id
-                })
+                const passes = res.data.filter(elm => elm.movieInfo.id == movie_id)
                 setPasses(passes)
-
             })
             .catch((err) => console.log(err))
     }
-
-
-    useEffect(() => {
-        oneMovieFetch()
-        passFetch()
-        fetchCombos()
-
-
-    }, [])
-
 
 
 
@@ -102,12 +102,12 @@ const MovieDetailsPage = () => {
 
                             </Row>
                             {
-                                passes.length === 0
-                                    ? <p className="no-sesions-form-btn" variant="danger"> No hay sesiones disponibles</p>
-                                    :
+                                user && passes.length !== 0
+                                    ?
                                     <Button onClick={handleShow} className=" sesions-form-btn" variant="dark" type="submit">
                                         Comprar entradas
                                     </Button>
+                                    : <p className="no-sesions-form-btn" variant="danger"> No hay sesiones disponibles</p>
 
                             }
 
@@ -119,6 +119,7 @@ const MovieDetailsPage = () => {
                                     <Modal.Title>Confirma tu pedido</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body>
+                                    {/* TODO: DESACOPLAR FORMULARIO */}
                                     <Form className="sesions-form d-block">
                                         <p>Estas comprando entrada para la pelicula {movie.title}</p>
                                         <Form.Select aria-label="Default select example">
@@ -153,7 +154,7 @@ const MovieDetailsPage = () => {
                                     <Button variant="secondary" onClick={handleClose}>
                                         Close
                                     </Button>
-                                    <Button variant="primary" onClick={handleClose}>
+                                    <Button variant="primary" onClick={getPack} >
                                         Confirmar
                                     </Button>
                                 </Modal.Footer>

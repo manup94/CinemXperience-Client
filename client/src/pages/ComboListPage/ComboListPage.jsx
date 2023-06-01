@@ -8,16 +8,16 @@ const ComboListPage = () => {
 
     const [combo, setCombos] = useState()
 
+    useEffect(() => {
+        fetchCombos()
+    }, [])
+
     const fetchCombos = () => {
         comboService
             .getCombos()
             .then(({ data }) => setCombos(data))
             .catch((error) => console.log(error))
     }
-
-    useEffect(() => {
-        fetchCombos()
-    }, [])
 
     return (
         <div className='loader-container'>

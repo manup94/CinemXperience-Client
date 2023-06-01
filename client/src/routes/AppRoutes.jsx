@@ -18,26 +18,27 @@ const AppRoutes = () => {
 
     return (
         <Routes>
-            <Route path='/' element={<IndexPage></IndexPage>}> </Route>
-            <Route path='/pass/:id' element={<h1>Sesiones especifica</h1>}> </Route>
-            <Route path='/pass/:id/buy' element={<h1>Sesiones Compra</h1>}> </Route>
-            <Route path='/movies/:movie_id' element={<MovieDetailsPage />}> </Route>
-            <Route path='/order' element={<h1>tu cesta</h1>}> </Route>
-            <Route path='/combos' element={<ComboListPage />}> </Route>
-            <Route path='/signup' element={<SignupPage />}> </Route>
-            <Route path='/login' element={<LoginPage />}> </Route>
+            <Route path='/' element={<IndexPage />} />
+            <Route path='/pass/:id' element={<h1>Sesiones especifica</h1>} />
+            <Route path='/pass/:id/buy' element={<h1>Sesiones Compra</h1>} />
+            <Route path='/movies/:movie_id' element={<MovieDetailsPage />} />
+            <Route path='/order' element={<h1>tu cesta</h1>} />
+            <Route path='/combos' element={<ComboListPage />} />
+            <Route path='/signup' element={<SignupPage />} />
+            <Route path='/login' element={<LoginPage />} />
 
+            {/* TODO: REVISAR EN DISCORD TECNICA DE PROTECCION EN GRUPO */}
             <Route path='' element={<PrivateRoute admittedRoles={['USER', 'ADMIN']} />}>
-                <Route path='/profile' element={<ProfilePage />}> </Route>
-                <Route path='/profile/:profile_id/edit' element={<EditProfileForm />}> </Route>
+                <Route path='/profile' element={<ProfilePage />} />
+                <Route path='/profile/:profile_id/edit' element={<EditProfileForm />} />
             </Route>
 
             <Route path='' element={<PrivateRoute admittedRoles={['ADMIN']} />} >
-                <Route path='/admin/pass/create' element={<NewSessionPage />}> </Route>
-                <Route path='/admin/pass' element={<PassListPage />}> </Route>
-                <Route path='/admin/pass/edit' element={<h1>Pirata</h1>}> </Route>
-                <Route path='/admin/pass/delete' element={<h1>Pirata</h1>}> </Route>
-                <Route path='/admin/combo/create' element={<NewComboPage />}> </Route>
+                <Route path='/admin/pass/create' element={<NewSessionPage />} />
+                <Route path='/admin/pass' element={<PassListPage />} />
+                <Route path='/admin/pass/edit' element={<h1>Pirata</h1>} />
+                <Route path='/admin/pass/delete' element={<h1>Pirata</h1>} />
+                <Route path='/admin/combo/create' element={<NewComboPage />} />
             </Route>
         </Routes>
     )
