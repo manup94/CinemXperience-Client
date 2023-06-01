@@ -29,9 +29,7 @@ const SignupForm = () => {
         authService
             .signup(signupData)
             .then(({ data }) => navigate('/profile'))
-            .catch(err => {
-                console.log(err);
-            })
+            .catch(err => setErrors(err.response.data.errorMessages))
     }
 
     const handleFileUpload = e => {

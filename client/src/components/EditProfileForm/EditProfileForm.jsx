@@ -1,16 +1,18 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Form, Button } from "react-bootstrap"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import authService from '../../services/auth.services'
 import FormError from "../FormError/FormError"
 import uploadServices from '../../services/upload.services';
+import profileService from "../../services/profile.services"
 
-const SignupForm = () => {
+const EditProfileForm = () => {
 
-    const [signupData, setSignupData] = useState({
+    const { profile_id } = useParams()
+
+    const [editProfileData, setEditProfileData] = useState({
         username: '',
         email: '',
-        password: '',
         avatar: ''
     })
 
@@ -18,20 +20,32 @@ const SignupForm = () => {
 
     const [errors, setErrors] = useState([])
 
+    useEffect(() => {
+        loadUser()
+    }, [])
+
     const handleInputChange = e => {
         const { value, name } = e.target
-        setSignupData({ ...signupData, [name]: value })
+        setEditProfileData({ ...editProfileData, [name]: value })
     }
 
     const handleSubmit = e => {
         e.preventDefault()
 
-        authService
-            .signup(signupData)
-            .then(({ data }) => navigate('/profile'))
-            .catch(err => {
-                console.log(err);
+        profileService
+            .editOneProfile(profile_id, editProfileData)
+            .then(({ data }) => {
+                setEditProfileData(data)
+                navigate('/profile')
             })
+            .catch(err => setErrors(err.response.data.errorMessages))
+    }
+
+    const loadUser = () => {
+        profileService
+            .editOneProfile(profile_id)
+            .then(({ data }) => setEditProfileData(data))
+            .catch(err => console.log(err))
     }
 
     const handleFileUpload = e => {
@@ -42,13 +56,13 @@ const SignupForm = () => {
         uploadServices
             .uploadimage(formData)
             .then(({ data }) => {
-                setSignupData({ ...signupData, avatar: data.cloudinary_url })
+                setEditProfileData({ ...editProfileData, avatar: data.cloudinary_url })
             })
             .catch(err => console.log(err))
     }
 
 
-    const { username, password, email } = signupData
+    const { username, email, avatar } = editProfileData
 
     return (
 
@@ -70,7 +84,7 @@ const SignupForm = () => {
             </Form.Group>
 
             <div className="d-grid">
-                <Button variant="dark" type="submit">Registrarme</Button>
+                <Button variant="dark" type="submit">Editar información</Button>
             </div>
             {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
 
@@ -78,4 +92,4 @@ const SignupForm = () => {
     )
 }
 
-export default SignupForm
+export default EditProfileForm

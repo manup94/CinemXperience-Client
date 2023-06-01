@@ -8,7 +8,7 @@ import { Col, Container, Row, Button, Form, Modal } from "react-bootstrap"
 import './MovieDetailsPage.css'
 import ComboList from '../../components/ComboList/ComboList'
 import ComboCard from "../../components/ComboCard/ComboCard"
-import * as Select from '@radix-ui/react-select';
+// import * as Select from '@radix-ui/react-select';
 import { AuthContext } from "../../context/auth.context"
 import { useIsRTL } from "react-bootstrap/esm/ThemeProvider"
 const { formatDate } = require('../../utils/formatDate');

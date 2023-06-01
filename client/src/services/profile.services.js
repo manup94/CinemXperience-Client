@@ -16,6 +16,9 @@ class ProfileService {
     getPack(profile_id, tiket, combo) {
         return this.api.get(`/${profile_id}/getTickets`)
     }
+    editOneProfile(profile_id, editedProfileData) {
+        return this.api.put(`/${profile_id}/edit`, editedProfileData)
+    }
 }
 
 const profileService = new ProfileService()
