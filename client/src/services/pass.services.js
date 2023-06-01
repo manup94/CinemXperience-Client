@@ -16,6 +16,10 @@ class PassService {
         return this.api.get(`${_id}/getOnePass`)
     }
 
+    getPassByMovie() {
+        return this.api.get(`${_id}/getPassByMovie`)
+    }
+
     createPass(passData) {
         return this.api.post('/createNewPass', passData)
     }

@@ -33,7 +33,7 @@ const MovieDetailsPage = () => {
 
     useEffect(() => {
         oneMovieFetch()
-        passFetch()
+        // passFetch()
         fetchCombos()
     }, [])
 
@@ -66,17 +66,25 @@ const MovieDetailsPage = () => {
             .catch(err => console.log(err))
     }
 
-    const passFetch = () => {
+    // const passFetch = () => {
 
-        // TODO: CREAR SERVICIO GETPASSESBYMOVIE
-        passServices
-            .getAllPass()
-            .then((res) => {
-                const passes = res.data.filter(elm => elm.movieInfo.id == movie_id)
-                setPasses(passes)
-            })
-            .catch((err) => console.log(err))
-    }
+    //     // TODO: CREAR SERVICIO GETPASSESBYMOVIE
+    //     passServices
+    //         .getAllPass()
+    //         .then((res) => {
+    //             const passes = res.data.filter(elm => elm.movieInfo.id == movie_id)
+    //             setPasses(passes)
+    //         })
+    //         .catch((err) => console.log(err))
+    // }
+
+    // const passFetch = () => {
+    //     passServices
+    //         .getPassByMovie(movie_id)
+    //         .then((res) => { console.log(res); })
+    //         .catch((err) => console.log(err))
+
+    // }
 
 
 
