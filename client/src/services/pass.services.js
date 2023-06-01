@@ -25,7 +25,6 @@ class PassService {
     }
 
 
-
 }
 
 const passService = new PassService()

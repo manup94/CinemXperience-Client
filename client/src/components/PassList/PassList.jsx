@@ -8,7 +8,12 @@ const PassList = ({ passes, fetchPasses }) => {
         passes.map(elm => {
             return (
                 <Col md={{ span: 4 }} key={elm._id}>
-                    <PassCard className="passes" {...elm} fetchPasses={fetchPasses} />
+                    <PassCard
+                        img={elm.movieInfo.poster_path}
+                        date={elm.passInfo.movieDate}
+                        _id={elm.passInfo._id}
+                        fetchPasses={fetchPasses}
+                        className="passes" />
                 </Col>
             )
         })

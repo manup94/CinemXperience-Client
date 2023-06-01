@@ -5,6 +5,8 @@ import moviesService from '../../services/movies.services';
 import passService from '../../services/pass.services';
 import { useNavigate } from "react-router-dom"
 import FormError from '../FormError/FormError';
+import { MessageContext } from '../../context/message.context';
+
 
 
 
@@ -45,7 +47,7 @@ const NewPassForm = () => {
                 movieId: Number(passData.movieId)
             })
             .then(() => {
-                navigate('/pass')
+                navigate('/')
                 emitMessage('Se ha creado una nueva sesion')
             })
             .catch(err => {

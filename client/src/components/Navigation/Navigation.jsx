@@ -42,6 +42,9 @@ const Navigation = () => {
                                         <NavDropdown.Item>
                                             <Link to={'/admin/combo/create'} className='dropdown-item'> Nuevo Combo </Link>
                                         </NavDropdown.Item>
+                                        <NavDropdown.Item>
+                                            <Link to={'/admin/pass'} className='dropdown-item'> Lista de sesiones </Link>
+                                        </NavDropdown.Item>
                                     </NavDropdown>
                                 </>
                                 :
@@ -74,7 +77,6 @@ const Navigation = () => {
                         <form>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                 <label className="Label" htmlFor="airplane-mode" style={{ paddingRight: 15 }}>
-                                    Modo Dia
                                 </label>
                                 <Switch.Root onClick={switchTheme} className="SwitchRoot" id="airplane-mode">
                                     <Switch.Thumb className="SwitchThumb"> </Switch.Thumb>

@@ -1,12 +1,16 @@
 import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import passService from "../../services/pass.services"
+import moviesServices from '../../services/movies.services'
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import './PassCard.css'
+import { useEffect, useState } from 'react';
+const { formatDate } = require('../../utils/formatDate');
 
 
 
-const PassCard = ({ movie, fetchPasses, _id }) => {
+const PassCard = ({ date, img, _id, fetchPasses }) => {
+
 
     const handleClick = () => {
         passService
@@ -18,18 +22,18 @@ const PassCard = ({ movie, fetchPasses, _id }) => {
     return (
 
         <Card style={{ width: '18rem' }}>
-            <Link className='title' to={`/pass/${_id}`}>
-                <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} />
-                    <Card.Body className='title-bg'>
-                        <Card.Title className='title'>{movie.title}</Card.Title>
 
-                    </Card.Body>
-                </Card>
-            </Link>
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src={`https://image.tmdb.org/t/p/original${img}`} />
+                <Card.Body className='title-bg'>
+                    <Card.Title className='date'>{formatDate(date)}</Card.Title>
+                </Card.Body>
+
+            </Card>
+
             <AlertDialog.Root>
                 <AlertDialog.Trigger asChild>
-                    <Button className='btn btn-danger btn-sm' >Delete</Button>
+                    <Button className='btn btn-danger btn-sm' >Eliminar</Button>
                 </AlertDialog.Trigger>
                 <AlertDialog.Portal>
                     < AlertDialog.Overlay className="overlay" />
@@ -43,7 +47,7 @@ const PassCard = ({ movie, fetchPasses, _id }) => {
                                 <Button variant="dark" >Cancel</Button >
                             </AlertDialog.Cancel>
                             <AlertDialog.Action asChild>
-                                <Button variant="danger" onClick={handleClick} >Si, eliminar pase</Button>
+                                <Button variant="danger" onClick={handleClick} >Si, eliminar sesion</Button>
                             </AlertDialog.Action>
                         </div>
                     </AlertDialog.Content>

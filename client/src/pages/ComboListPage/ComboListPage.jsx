@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import comboService from "../../services/combos.services"
-import { Container, Row } from 'react-bootstrap'
+import { Container, Spinner, Row } from 'react-bootstrap'
 import ComboList from "../../components/ComboList/ComboList"
+import './ComboListPage'
 
 const ComboListPage = () => {
 
@@ -19,20 +20,27 @@ const ComboListPage = () => {
     }, [])
 
     return (
-        <Container>
-            <h1>Lista de combos</h1>
-            <hr />
-            <Row>
-                {
-                    !combo
-                        ?
-                        <h1>Loading...</h1>
-                        :
-                        <ComboList fetchCombos={fetchCombos} combo={combo} />
-                }
-
-            </Row>
-        </Container>
+        <div className='loader-container'>
+            {!combo ? (
+                <div >
+                    <Spinner className='loader' animation="border" variant="light" />
+                </div>
+            )
+                :
+                (
+                    <Container className="combo-container">
+                        <Row >
+                            {
+                                !combo ? (
+                                    <h1>Loading...</h1>
+                                ) : (
+                                    <ComboList fetchCombos={fetchCombos} combo={combo} />
+                                )
+                            }
+                        </Row>
+                    </Container>
+                )}
+        </div>
     )
 }
 
