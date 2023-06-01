@@ -12,6 +12,10 @@ class ProfileService {
     getOneProfile(profile_id) {
         return this.api.get(`/${profile_id}/getOneProfile`)
     }
+
+    editOneProfile(profile_id, editedProfileData) {
+        return this.api.put(`/${profile_id}/edit`, editedProfileData)
+    }
 }
 
 const profileService = new ProfileService()

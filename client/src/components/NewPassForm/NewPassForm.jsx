@@ -5,12 +5,7 @@ import moviesService from '../../services/movies.services';
 import passService from '../../services/pass.services';
 import { useNavigate } from "react-router-dom"
 import FormError from '../FormError/FormError';
-<<<<<<< HEAD
-import { MessageContext } from '../../context/message.context';
-
-=======
 import { MessageContext } from '../../context/message.context'
->>>>>>> b95eddc2d1d3ba79655576306b00e14f2ab3ccf4
 
 
 

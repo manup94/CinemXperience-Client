@@ -34,9 +34,7 @@ const LoginForm = () => {
                 authenticateUser()
                 navigate('/')
             })
-            .catch(err => {
-                console.log(err);
-            })
+            .catch(err => setErrors(err.response.data.errorMessages))
     }
 
 

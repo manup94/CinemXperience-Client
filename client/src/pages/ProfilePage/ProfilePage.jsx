@@ -33,7 +33,7 @@ const ProfilePage = () => {
                     :
                     <>
                         <Container fluid>
-                            <Row className="justify-content-center mt-4">
+                            <Row className="justify-content-center mt-4 mb-4">
                                 <Col xs={10} sm={8} md={6} lg={4}>
                                     <Card className="shadow">
                                         <Card.Img variant="top" src={profile.avatar} alt="Image" />

@@ -22,7 +22,7 @@ const Navigation = () => {
     return (
 
 
-        <Navbar bg={variant} variant={variant} expand="lg" className=' mb-0'>
+        <Navbar bg={variant} variant={variant} expand="lg" className=' mb-0' key={user?.username}>
             <Container>
                 <Navbar.Brand>
                     <Link to={'/'} className='nav-link'> CinemXperience </Link>
@@ -59,7 +59,7 @@ const Navigation = () => {
                                         <Link onClick={logout} className='nav-link'> Logout </Link>
                                     </NavDropdown.Item>
                                     <NavDropdown.Item>
-                                        <Link to={'/profile'} className='nav-link'> {user.username}! </Link>
+                                        <Link to={'/profile'} className='nav-link'> {user?.username}! </Link>
                                     </NavDropdown.Item>
                                 </>
                                 :
