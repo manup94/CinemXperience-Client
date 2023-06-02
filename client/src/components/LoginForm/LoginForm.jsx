@@ -4,6 +4,7 @@ import authService from './../../services/auth.services'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from "../../context/auth.context"
 import FormError from "../FormError/FormError"
+import { MessageContext } from "../../context/message.context"
 
 const LoginForm = () => {
 
@@ -15,6 +16,8 @@ const LoginForm = () => {
     })
 
     const navigate = useNavigate()
+
+    const { emitMessage } = useContext(MessageContext)
 
     const { authenticateUser, storeToken } = useContext(AuthContext)
 
@@ -32,6 +35,7 @@ const LoginForm = () => {
             .then(({ data }) => {
                 storeToken(data.authToken)
                 authenticateUser()
+                emitMessage('Login correcto')
                 navigate('/')
             })
             .catch(err => setErrors(err.response.data.errorMessages))
