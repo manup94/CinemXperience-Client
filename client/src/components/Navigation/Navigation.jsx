@@ -56,7 +56,7 @@ const Navigation = () => {
                                 user?.role === 'ADMIN'
                                     ?
                                     <>
-                                        <NavDropdown title="Admin" id="basic-nav-dropdown" className="custom-nav-dropdown">
+                                        <NavDropdown title="Panel de Admin" id="basic-nav-dropdown" className="custom-nav-dropdown">
                                             <NavDropdown.Item as={'span'}>
                                                 <Link to={'/admin/pass/create'} className='dropdown-item'> Nueva Sesión </Link>
                                             </NavDropdown.Item>

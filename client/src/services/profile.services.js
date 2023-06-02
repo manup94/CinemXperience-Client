@@ -13,11 +13,16 @@ class ProfileService {
         return this.api.get(`/${profile_id}/getOneProfile`)
     }
 
-    getPack(profile_id, tiket, combo) {
-        return this.api.get(`/${profile_id}/getTickets`)
+    getTickets(profile_id, tickets, combo) {
+        return this.api.put(`/${profile_id}/getTickets`, tickets, combo)
+
     }
     editOneProfile(profile_id, editedProfileData) {
         return this.api.put(`/${profile_id}/edit`, editedProfileData)
+    }
+
+    getPackDetails(pack_id) {
+        return this.api.get(`/${pack_id}/getPackDetails`)
     }
 }
 

@@ -34,20 +34,13 @@ const MovieDetailsPage = () => {
         fetchCombos()
     }, [])
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => { setShow(false) }
 
     const handleShow = (e) => {
         e.preventDefault()
         setShow(true)
     }
 
-    // const getPack = () => {
-
-    //     profileServices
-    //         .getPack(user._id)
-    //         .then(res => console.log('compra realizada', res))
-    //         .catch(err => console.log(err))
-    // }
 
     const fetchCombos = () => {
         comboService
@@ -63,16 +56,13 @@ const MovieDetailsPage = () => {
             .catch(err => console.log(err))
     }
 
-
-
     const passFetch = () => {
         passServices
             .getPassByMovie(movie_id)
-            .then((res) => { console.log(res); })
+            .then(res => setPasses(res.data))
             .catch((err) => console.log(err))
 
     }
-
 
     return (
         <div className="full-container">
@@ -96,23 +86,19 @@ const MovieDetailsPage = () => {
 
                             </Row>
                             {
-                                // user && passes.length !== 0
-                                //     ?
-                                //     <Button onClick={handleShow} className=" sesions-form-btn" variant="dark" type="submit">
-                                //         Comprar entradas
-                                //     </Button>
-                                //     : <p className="no-sesions-form-btn" variant="danger"> No hay sesiones disponibles</p>
+
                                 <div>
                                     {user && passes.length !== 0 ? (
-                                        <button onClick={handleShow} className="sesions-form-btn" variant="dark" type="submit">
+                                        <Button onClick={handleShow} className="sesions-form-btn" variant="dark" >
                                             Comprar entradas
-                                        </button>
+                                        </Button>
                                     ) : passes.length === 0 ? (
                                         <p className="no-sesions-form-btn" variant="danger">No hay sesiones disponibles</p>
                                     ) : (
-                                        <Link className="sesions-form-btn"><Button>Por favor, inicia sesión para comprar entradas</Button></Link>
+                                        <Link to={'/login'} className="sesions-form-btn"><Button>Por favor, inicia sesión para comprar entradas</Button></Link>
                                     )}
                                 </div>
+
                             }
 
                         </Col>
@@ -126,7 +112,8 @@ const MovieDetailsPage = () => {
                                     handleClose={handleClose}
                                     passes={passes}
                                     combo={combo}
-                                    movie={movie} />
+                                    movie={movie}
+                                />
 
                             </Modal>
                         </>
