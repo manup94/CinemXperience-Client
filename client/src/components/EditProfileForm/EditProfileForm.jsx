@@ -5,6 +5,7 @@ import authService from '../../services/auth.services'
 import FormError from "../FormError/FormError"
 import uploadServices from '../../services/upload.services';
 import profileService from "../../services/profile.services"
+import Loader from "../Loader/Loader"
 
 const EditProfileForm = () => {
 
@@ -47,7 +48,7 @@ const EditProfileForm = () => {
         profileService
             .getOneProfile(profile_id)
             .then(({ data }) => setEditProfileData(data))
-            .catch(err => console.log(err))
+            .catch(err => setErrors(err.response.data.errorMessages))
     }
 
     const handleFileUpload = e => {
@@ -64,7 +65,7 @@ const EditProfileForm = () => {
                 setLoadingImage(false)
             })
 
-            .catch(err => console.log(err))
+            .catch(err => setErrors(err.response.data.errorMessages))
     }
 
 
@@ -90,7 +91,7 @@ const EditProfileForm = () => {
             </Form.Group>
 
             <div className="d-grid">
-                <Button variant="dark" type="submit" disabled={loadingImage}>{loadingImage ? 'Loading Image...' : 'Editar información'}</Button>
+                <Button variant="dark" type="submit" disabled={loadingImage}>{loadingImage ? <Loader /> : 'Editar información'}</Button>
             </div>
             {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
 

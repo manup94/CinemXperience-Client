@@ -4,12 +4,14 @@ import moviesService from '../../services/movies.services';
 import MoviesList from '../../components/MoviesList/MoviesList';
 import { Link, useNavigate } from "react-router-dom"
 import './IndexPage.css'
+import SearchBar from '../../components/SearchBar/SearchBar';
 
 
 const IndexPage = () => {
     const baseImageUrl = 'https://image.tmdb.org/t/p/original'
 
     const [movieData, setMovieData] = useState([])
+    const [movieDataBackup, setMovieDataBackup] = useState([])
     const [sliderMovies, setSliderMovies] = useState([]);
 
     const moviesFetch = () => {
@@ -18,6 +20,7 @@ const IndexPage = () => {
             .then((res) => {
                 const titles = res.data.results
                 setMovieData(titles)
+                setMovieDataBackup(titles)
                 return titles;
             })
             .catch((err) => console.log(err));
@@ -33,10 +36,18 @@ const IndexPage = () => {
             .catch((err) => console.log(err));
     }, []);
 
+    const filterData = query => {
+        const filterDataMovie = movieDataBackup.filter(elm => elm.title.toLowerCase().includes(query.toLowerCase()))
+        setMovieData(filterDataMovie)
+    }
 
 
     return (
         <>
+            <div>
+                <SearchBar filterData={filterData} />
+                <hr />
+            </div>
             {
 
                 movieData.length === 0
