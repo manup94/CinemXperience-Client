@@ -1,9 +1,10 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Form, Button } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import authService from './../../services/auth.services'
 import FormError from "../FormError/FormError"
 import uploadServices from '../../services/upload.services';
+import { MessageContext } from "../../context/message.context"
 
 const SignupForm = () => {
 
@@ -15,6 +16,8 @@ const SignupForm = () => {
     })
 
     const navigate = useNavigate()
+
+    const { emitMessage } = useContext(MessageContext)
 
     const [errors, setErrors] = useState([])
 
@@ -28,7 +31,10 @@ const SignupForm = () => {
 
         authService
             .signup(signupData)
-            .then(({ data }) => navigate('/profile'))
+            .then(({ data }) => {
+                navigate('/profile')
+                emitMessage('Usuario creado')
+            })
             .catch(err => setErrors(err.response.data.errorMessages))
     }
 

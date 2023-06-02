@@ -8,6 +8,7 @@ import { AuthContext } from './../../context/auth.context'
 import { ThemeContext } from '../../context/theme.context';
 import * as Switch from '@radix-ui/react-switch';
 import './Navigation.css'
+import Avatar from 'react-avatar';
 
 const Navigation = () => {
 
@@ -20,6 +21,7 @@ const Navigation = () => {
     const [isNavbarVisible, setIsNavbarVisible] = useState(true);
 
     const [prevScrollPos, setPrevScrollPos] = useState(0);
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -52,6 +54,7 @@ const Navigation = () => {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
                             <Link to={'/combos'} className='nav-link'> Combos </Link>
+                            <Link to={'/TopRatedMovieList'} className='nav-link'> Top Movies </Link>
                             {
                                 user?.role === 'ADMIN'
                                     ?
@@ -72,29 +75,33 @@ const Navigation = () => {
                                     <>
                                     </>
                             }
-                            {
-                                user
-                                    ?
-                                    <>
+                            {user ? (
+                                <>
+                                    <NavDropdown.Item as={'span'}>
+                                        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                            <Link to={'/profile'} className='nav-link'>
+                                                <Avatar src={user.avatar} round={true} size="40" />
+                                            </Link>
+                                        </div>
+                                    </NavDropdown.Item>
+
+                                    <NavDropdown.Item as={'span'}>
+                                        <Link onClick={logout} className='nav-link'> Logout </Link>
+                                    </NavDropdown.Item>
+                                </>
+                            ) : (
+                                <>
+                                    <NavDropdown title="Auth" id="basic-nav-dropdown" className="custom-nav-dropdown">
                                         <NavDropdown.Item as={'span'}>
-                                            <Link onClick={logout} className='nav-link'> Logout </Link>
+                                            <Link to={'/signup'} className='dropdown-item'> Registro </Link>
                                         </NavDropdown.Item>
                                         <NavDropdown.Item as={'span'}>
-                                            <Link to={'/profile'} className='nav-link'> {user?.username}! </Link>
+                                            <Link to={'/login'} className='dropdown-item'> Iniciar Sesion </Link>
                                         </NavDropdown.Item>
-                                    </>
-                                    :
-                                    <>
-                                        <NavDropdown title="Auth" id="basic-nav-dropdown" className="custom-nav-dropdown">
-                                            <NavDropdown.Item as={'span'}>
-                                                <Link to={'/signup'} className='dropdown-item'> Registro </Link>
-                                            </NavDropdown.Item>
-                                            <NavDropdown.Item as={'span'}>
-                                                <Link to={'/login'} className='dropdown-item'> Iniciar Sesion </Link>
-                                            </NavDropdown.Item>
-                                        </NavDropdown>
-                                    </>
-                            }
+                                    </NavDropdown>
+                                </>
+                            )}
+
                         </Nav>
                         <div className='justify-content-end'>
                             <form>
