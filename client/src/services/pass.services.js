@@ -16,7 +16,7 @@ class PassService {
         return this.api.get(`${_id}/getOnePass`)
     }
 
-    getPassByMovie() {
+    getPassByMovie(_id) {
         return this.api.get(`${_id}/getPassByMovie`)
     }
 
