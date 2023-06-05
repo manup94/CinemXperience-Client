@@ -28,8 +28,6 @@ const ProfilePage = () => {
 
     const baseImageUrl = 'https://image.tmdb.org/t/p/original'
 
-    const basePosterUrl = 'https://image.tmdb.org/t/p/w200'
-
     useEffect(() => {
         getUserInfo()
     }, [])
@@ -41,7 +39,7 @@ const ProfilePage = () => {
             .getOneProfile(user._id)
             .then(({ data }) => {
                 setProfile(data);
-                getWatchlist(data.watchList) ///////
+                getWatchlist(data.watchList)
                 GetMovies(data.packs.map((pack) => {
                     console.log(pack.ticket);
                     return pack.ticket
@@ -178,7 +176,7 @@ const ProfilePage = () => {
                                             {movie.map((movie) => (
                                                 <Col xs={4} key={movie.id} className="m-2">
                                                     <div className="movie-card">
-                                                        <img src={`${basePosterUrl}${movie.poster_path}`} alt="" />
+                                                        <img src={`${baseImageUrl}${movie.poster_path}`} alt="" />
                                                         <div className="movie-title">{movie.title}</div>
                                                         <Button onClick={() => removeMovieFromWatchlist(movie.id)}>Remove</Button>
                                                     </div>
