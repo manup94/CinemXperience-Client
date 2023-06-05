@@ -29,13 +29,25 @@ const TopMoviePage = () => {
 
     const handleNextPage = () => {
         setPage(prevPage => prevPage + 1)
-        console.log(page)
+
     }
 
     const handlePreviousPage = () => {
         if (page > 1) {
             setPage(prevPage => prevPage - 1)
         }
+    }
+
+    const handleButton = e => {
+
+        moviesService
+            .GetFilteredMovies(e.target.value, page)
+            .then((res) => {
+                const titles = res.data.results
+                setMovieData(titles)
+                return titles;
+            })
+            .catch((err) => console.log(err));
     }
 
     return (
@@ -45,6 +57,12 @@ const TopMoviePage = () => {
             :
             <section>
                 <div className='container'>
+                    <button onClick={handleButton} value={28} className="mr-2 btn btn-secondary button " >Accion</button>
+                    <button onClick={handleButton} value={27} className="mr-2 btn btn-secondary button " >Terror</button>
+                    <button onClick={handleButton} value={16} className="mr-2 btn btn-secondary button " >Infantil</button>
+                    <button onClick={handleButton} value={18} className="mr-2 btn btn-secondary button " >Drama</button>
+                    <button onClick={moviesFetch} className="mr-2 btn btn-secondary button " >All</button>
+
                     <Row>
                         <TopMovieList moviesFetch={moviesFetch} movieData={movieData} />
                     </Row>

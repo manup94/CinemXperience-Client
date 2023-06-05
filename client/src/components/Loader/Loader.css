@@ -1,0 +1,21 @@
+.loader-container {
+    height: 100vh;
+}
+
+
+.loader {
+    margin-top: 300px;
+    width: 200px;
+    height: 200px;
+
+}
+
+@keyframes loader {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

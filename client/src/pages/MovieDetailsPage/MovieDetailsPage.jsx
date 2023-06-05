@@ -3,11 +3,13 @@ import { useParams } from "react-router"
 import passServices from '../../services/pass.services'
 import moviesServices from '../../services/movies.services'
 import comboService from '../../services/combos.services'
-import { Col, Container, Row, Button, Form, Modal } from "react-bootstrap"
+import { Col, Container, Row, Button, Spinner, Modal } from "react-bootstrap"
 import './MovieDetailsPage.css'
 import { AuthContext } from "../../context/auth.context"
 import ConfirmOrder from "../../components/ConfirmOrder/ConfirmOrder"
 import { Link } from "react-router-dom"
+import Loader from "../../components/Loader/Loader"
+
 const { formatDate } = require('../../utils/formatDate');
 
 
@@ -65,65 +67,67 @@ const MovieDetailsPage = () => {
     }
 
     return (
-        <div className="full-container">
-            {
-                !combo
-                    ? <h1>Loading...</h1>
-                    :
 
-                    <Container className="d-flex mt-5 ">
-                        <Col className=" img-container" >
-                            <Row>
-                                < img className="img image" src={`${baseImageUrl}${movie.poster_path}`} alt="movie-poster" />
-                            </Row>
-
-                        </Col>
-                        <Col className="details-container text-container">
-                            <Row className="d-flex movie-details">
-                                <h1 className="text">{movie.title}</h1>
-                                <p className="text">{movie.overview}</p>
-                                <p className="text">Fecha de estreno: {formatDate(movie.release_date)}</p>
-
-                            </Row>
-                            {
-
-                                <div>
-                                    {user && passes.length !== 0 ? (
-                                        <Button onClick={handleShow} className="sesions-form-btn" variant="dark" >
-                                            Comprar entradas
-                                        </Button>
-                                    ) : passes.length === 0 ? (
-                                        <p className="no-sesions-form-btn" variant="danger">No hay sesiones disponibles</p>
-                                    ) : (
-                                        <Link to={'/login'} className="sesions-form-btn"><Button>Por favor, inicia sesión para comprar entradas</Button></Link>
-                                    )}
-                                </div>
-
-                            }
-
-                        </Col>
-                        <>
-
-                            <Modal show={show} onHide={handleClose}>
-                                <Modal.Header closeButton>
-                                    <Modal.Title>Confirma tu pedido</Modal.Title>
-                                </Modal.Header>
-                                <ConfirmOrder
-                                    handleClose={handleClose}
-                                    passes={passes}
-                                    combo={combo}
-                                    movie={movie}
-                                />
-
-                            </Modal>
-                        </>
+        !movie.poster_path
+            ? <Loader />
+            :
+            <div className="full-container">
 
 
 
-                    </Container >
-            }
+                <Container className="d-flex mt-5 ">
+                    <Col className=" img-container" >
+                        <Row>
+                            < img className="img image" src={`${baseImageUrl}${movie.poster_path}`} alt="movie-poster" />
+                        </Row>
 
-        </div>
+                    </Col>
+                    <Col className="details-container text-container">
+                        <Row className="d-flex movie-details align-content-center">
+                            <h1 className="text">{movie.title}</h1>
+                            <p className="text">{movie.overview}</p>
+                            <p className="text">Fecha de estreno: {formatDate(movie.release_date)}</p>
+
+                        </Row>
+                        {
+
+                            <div>
+                                {user && passes.length !== 0 ? (
+                                    <Button onClick={handleShow} className="sesions-form-btn" variant="dark" >
+                                        Comprar entradas
+                                    </Button>
+                                ) : passes.length === 0 ? (
+                                    <p className="no-sesions-form-btn" variant="danger">No hay sesiones disponibles</p>
+                                ) : (
+                                    <Link to={'/login'} className="sesions-form-btn"><Button>Por favor, inicia sesión para comprar entradas</Button></Link>
+                                )}
+                            </div>
+
+                        }
+
+                    </Col>
+                    <>
+
+                        <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Confirma tu pedido</Modal.Title>
+                            </Modal.Header>
+                            <ConfirmOrder
+                                handleClose={handleClose}
+                                passes={passes}
+                                combo={combo}
+                                movie={movie}
+                            />
+
+                        </Modal>
+                    </>
+
+
+
+                </Container >
+
+
+            </div>
 
 
     )

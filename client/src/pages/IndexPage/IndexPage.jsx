@@ -43,7 +43,7 @@ const IndexPage = () => {
 
 
     return (
-        <>
+        <div className='index-container'>
             <div className='search-bar d-flex'>
                 <img className="search " src="../../../search.png" alt="ticket" />
                 <SearchBar filterData={filterData} />
@@ -97,7 +97,7 @@ const IndexPage = () => {
                         </section>
                     </>
             }
-        </>
+        </div>
 
 
 

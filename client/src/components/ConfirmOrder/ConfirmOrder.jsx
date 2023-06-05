@@ -2,17 +2,26 @@ import { useContext, useState } from "react"
 import { Button, Form, Modal } from "react-bootstrap"
 import { AuthContext } from "../../context/auth.context"
 import profileServices from '../../services/profile.services'
+import FormError from "../FormError/FormError";
+import { MessageContext } from "../../context/message.context";
+
 const { formatDate } = require('../../utils/formatDate');
 
 
 const ConfirmOrder = ({ handleClose, passes, combo, movie }) => {
+
     const { user } = useContext(AuthContext);
 
     const [selectCombo, setSelectCombo] = useState();
+
     const [selectPass, setSelectPass] = useState();
+
     const { emitMessage } = useContext(MessageContext);
+
     const [errors, setErrors] = useState([]);
-    const [loading, setLoading] = useState(false); // Loading state
+
+    const [loading, setLoading] = useState(false);
+
 
     const handlePassSelect = (event) => {
         const selectedPass = event.target.value;
@@ -25,18 +34,18 @@ const ConfirmOrder = ({ handleClose, passes, combo, movie }) => {
     };
 
     const getTickets = () => {
-        setLoading(true); // Set loading state to true
+        setLoading(true)
 
         profileServices
             .getTickets(user._id, { ticket: selectPass, combo: selectCombo })
             .then(({ data }) => {
                 emitMessage('Compra realizada');
-                setLoading(false); // Set loading state to false after success
+                setLoading(false)
                 handleClose();
             })
             .catch((err) => {
                 setErrors(err.response.data.errorMessages);
-                setLoading(false); // Set loading state to false after error
+                setLoading(false)
             });
     };
 

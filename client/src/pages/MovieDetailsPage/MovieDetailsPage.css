@@ -22,11 +22,13 @@
 
 }
 
+
 .details-container {
     text-align: center;
     border: white solid 3px;
     border-radius: 13px;
     box-shadow: 7px 7px 12px white;
+
 }
 
 .sesions-form {
