@@ -1,6 +1,5 @@
 import { Container, Row, Col } from 'react-bootstrap'
 import LoginForm from '../../components/LoginForm/LoginForm'
-import { color } from '@cloudinary/url-gen/qualifiers/background'
 
 
 const LoginPage = () => {

@@ -1,4 +1,4 @@
-import { Children, useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router"
 import passServices from '../../services/pass.services'
 import moviesServices from '../../services/movies.services'

@@ -1,6 +1,6 @@
 import { Col } from "react-bootstrap"
 import MovieCard from "../MovieCard/MovieCard"
-import TopMovieCard from "../TopMovieCard/TopMovieCard"
+
 
 
 const MoviesList = ({ movieData, moviesFetch }) => {

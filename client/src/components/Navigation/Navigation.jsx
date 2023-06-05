@@ -54,7 +54,7 @@ const Navigation = () => {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto  navbar-edit">
                             <Link to={'/combos'} className='nav-link '> Combos </Link>
-                            <Link to={'/TopRatedMovieList'} className='nav-link'> Top Movies </Link>
+                            <Link to={'/TopRatedMovieList'} className='nav-link top-movies'> Top Movies </Link>
                             {
                                 user?.role === 'ADMIN'
                                     ?
@@ -77,17 +77,20 @@ const Navigation = () => {
                             }
                             {user ? (
                                 <>
-                                    <NavDropdown.Item as={'span'}>
-                                        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                                            <Link to={'/profile'} className='nav-link'>
-                                                <Avatar src={user.avatar} round={true} size="40" />
-                                            </Link>
-                                        </div>
-                                    </NavDropdown.Item>
+                                    <div className='logout-container'>
+                                        <NavDropdown.Item as={'span'}>
+                                            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                                <Link to={'/profile'} className='nav-link'>
+                                                    <Avatar src={user.avatar} round={true} size="40" />
+                                                </Link>
+                                            </div>
+                                        </NavDropdown.Item>
 
-                                    <NavDropdown.Item as={'span'}>
-                                        <Link onClick={logout} className='nav-link'> Logout </Link>
-                                    </NavDropdown.Item>
+                                        <NavDropdown.Item as={'span'}>
+                                            <Link onClick={logout} className='nav-link logout-margin'> Logout </Link>
+                                        </NavDropdown.Item>
+
+                                    </div>
                                 </>
                             ) : (
                                 <>

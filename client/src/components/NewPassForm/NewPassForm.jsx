@@ -6,6 +6,7 @@ import passService from '../../services/pass.services';
 import { useNavigate } from "react-router-dom"
 import FormError from '../FormError/FormError';
 import { MessageContext } from '../../context/message.context'
+import './NewPassForm.css'
 
 
 
@@ -67,7 +68,7 @@ const NewPassForm = () => {
     };
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form className='passForm' onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="movieInfo">
                 <Form.Label>Pelicula:</Form.Label>
                 <Form.Control
@@ -97,7 +98,7 @@ const NewPassForm = () => {
 
             {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
 
-            <Button variant="primary" type="submit">
+            <Button variant="dark" type="submit">
                 Crear
             </Button>
         </Form>

@@ -1,10 +1,7 @@
 import { Card, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import passService from "../../services/pass.services"
-import moviesServices from '../../services/movies.services'
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import './PassCard.css'
-import { useEffect, useState } from 'react';
 const { formatDate } = require('../../utils/formatDate');
 
 

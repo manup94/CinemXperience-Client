@@ -5,7 +5,7 @@ const NewPassPage = () => {
 
     return (
         <Container>
-            <h1>Nueva Sesión</h1>
+            <h1 style={{ color: 'white' }}>Nueva Sesión</h1>
             <hr />
             <NewPassForm />
         </Container>

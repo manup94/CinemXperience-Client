@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
-import { Row } from "react-bootstrap"
+import { Row, Spinner } from "react-bootstrap"
 import moviesService from "../../services/movies.services"
+import './TopMoviePage.css'
 import TopMovieList from "../../components/TopMovieList/TopMovieList"
 
 
 const TopMoviePage = () => {
-    const baseImageUrl = 'https://image.tmdb.org/t/p/original'
+
 
     const [movieData, setMovieData] = useState([])
 
@@ -38,18 +39,24 @@ const TopMoviePage = () => {
     }
 
     return (
-        <section>
-            <div className='container'>
-                <Row>
-                    <TopMovieList moviesFetch={moviesFetch} movieData={movieData} />
-                </Row>
-                <div className="d-flex justify-content-center mt-5">
-                    <button className="mr-2 btn btn-secondary flex-fill" onClick={handlePreviousPage}>Previous Page</button>
-                    <div style={{ width: '50px' }}></div>
-                    <button className="btn btn-secondary flex-fill" style={{ marginLeft: 'auto' }} onClick={handleNextPage}>Next Page</button>
+
+        movieData.length === 0
+            ? <div className='loader-container'><Spinner className='loader' animation="border" variant="light" /></div>
+            :
+            <section>
+                <div className='container'>
+                    <Row>
+                        <TopMovieList moviesFetch={moviesFetch} movieData={movieData} />
+                    </Row>
+                    <div className="d-flex justify-content-center mt-5">
+                        <button className="mr-2 btn btn-secondary button " onClick={handlePreviousPage}>Pagina anterior</button>
+                        <div style={{ width: '50px' }}></div>
+                        <button className="btn btn-secondary button " style={{ marginLeft: 'auto' }} onClick={handleNextPage}>Pagina siguiente</button>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+
+
     )
 }
 

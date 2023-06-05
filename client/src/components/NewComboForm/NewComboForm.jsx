@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 import uploadServices from '../../services/upload.services';
 import FormError from '../FormError/FormError';
 import { MessageContext } from '../../context/message.context';
+import './NewComboForm.css'
 
 
 const NewComboForm = () => {
@@ -58,7 +59,7 @@ const NewComboForm = () => {
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form className='comboForm' onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="name">
                 <Form.Label>Nombre</Form.Label>
                 <Form.Control type="text"
@@ -102,7 +103,7 @@ const NewComboForm = () => {
             </Form.Group>
 
             {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
-            <Button variant="primary" type="submit">
+            <Button variant="dark" type="submit">
                 Crear
             </Button>
         </Form>

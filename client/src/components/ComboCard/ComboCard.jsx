@@ -1,12 +1,17 @@
 import { Card, Button, Accordion } from 'react-bootstrap';
+import { useContext, useState, useEffect } from 'react';
 import './ComboCard.css'
-import { Link } from 'react-router-dom';
 import comboService from "../../services/combos.services"
+import { AuthContext } from './../../context/auth.context'
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import * as HoverCard from '@radix-ui/react-hover-card';
 
 
+
+
 const ComboCard = ({ name, snacks, drinks, _id, fetchCombos, price, image }) => {
+
+    const { user } = useContext(AuthContext)
 
     const handleClick = () => {
         comboService
@@ -63,32 +68,40 @@ const ComboCard = ({ name, snacks, drinks, _id, fetchCombos, price, image }) => 
                     </HoverCard.Content>
                 </HoverCard.Portal>
             </HoverCard.Root>
+            {
+                user?.role === 'ADMIN'
+                &&
+                <AlertDialog.Root>
+                    <AlertDialog.Trigger asChild>
+                        <Button className='btn btn-danger btn-sm' >Delete</Button>
+                    </AlertDialog.Trigger>
+                    <AlertDialog.Portal>
+                        < AlertDialog.Overlay className="overlay" />
+                        <AlertDialog.Content className="content">
+                            <AlertDialog.Title className="AlertDialogTitle">¿Estas completamente seguro?</AlertDialog.Title>
+                            <AlertDialog.Description className="AlertDialogDescription">
+                                Esta accion no se puede deshacer, se eliminara completamente de la base de datos
+                            </AlertDialog.Description>
+                            <div style={{ display: 'flex', gap: 25, justifyContent: 'flex-end' }}>
+                                <AlertDialog.Cancel asChild>
+                                    <Button variant="dark" >Cancel</Button >
+                                </AlertDialog.Cancel>
+                                <AlertDialog.Action asChild>
+                                    <Button variant="danger" onClick={handleClick} >Si, eliminar combo</Button>
+                                </AlertDialog.Action>
+                            </div>
+                        </AlertDialog.Content>
+                    </AlertDialog.Portal>
+                </AlertDialog.Root>
 
-            <AlertDialog.Root>
-                <AlertDialog.Trigger asChild>
-                    <Button className='btn btn-danger btn-sm' >Delete</Button>
-                </AlertDialog.Trigger>
-                <AlertDialog.Portal>
-                    < AlertDialog.Overlay className="overlay" />
-                    <AlertDialog.Content className="content">
-                        <AlertDialog.Title className="AlertDialogTitle">¿Estas completamente seguro?</AlertDialog.Title>
-                        <AlertDialog.Description className="AlertDialogDescription">
-                            Esta accion no se puede deshacer, se eliminara completamente de la base de datos
-                        </AlertDialog.Description>
-                        <div style={{ display: 'flex', gap: 25, justifyContent: 'flex-end' }}>
-                            <AlertDialog.Cancel asChild>
-                                <Button variant="dark" >Cancel</Button >
-                            </AlertDialog.Cancel>
-                            <AlertDialog.Action asChild>
-                                <Button variant="danger" onClick={handleClick} >Si, eliminar combo</Button>
-                            </AlertDialog.Action>
-                        </div>
-                    </AlertDialog.Content>
-                </AlertDialog.Portal>
-            </AlertDialog.Root>
+
+            }
+
+
+
 
         </Card>
-    );
+    )
 }
 
 export default ComboCard;

@@ -2,6 +2,11 @@
     width: 300px;
 }
 
+.search {
+    width: 10%;
+    margin-right: 10px;
+}
+
 .movie-img {
     width: 100%;
     display: inline;

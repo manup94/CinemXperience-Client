@@ -1,8 +1,8 @@
-import { Container, Carousel, Spinner, Row, Col } from 'react-bootstrap'
+import { Carousel, Spinner, Row, Col } from 'react-bootstrap'
 import { useState, useEffect } from 'react';
 import moviesService from '../../services/movies.services';
 import MoviesList from '../../components/MoviesList/MoviesList';
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import './IndexPage.css'
 import SearchBar from '../../components/SearchBar/SearchBar';
 
@@ -44,7 +44,8 @@ const IndexPage = () => {
 
     return (
         <>
-            <div className='search-bar'>
+            <div className='search-bar d-flex'>
+                <img className="search " src="../../../search.png" alt="ticket" />
                 <SearchBar filterData={filterData} />
                 <hr />
             </div>

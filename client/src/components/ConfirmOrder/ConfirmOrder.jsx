@@ -1,14 +1,8 @@
-import { Children, useContext, useEffect, useState } from "react"
-import { Col, Container, Row, Button, Form, Modal } from "react-bootstrap"
+import { useContext, useState } from "react"
+import { Button, Form, Modal } from "react-bootstrap"
 import { AuthContext } from "../../context/auth.context"
-import { Link } from 'react-router-dom';
 import profileServices from '../../services/profile.services'
-import { Value } from "@radix-ui/react-select";
-import { loadStripe } from '@stripe/stripe-js';
-
 const { formatDate } = require('../../utils/formatDate');
-
-
 
 
 const ConfirmOrder = ({ handleClose, passes, combo, movie }) => {
@@ -41,27 +35,6 @@ const ConfirmOrder = ({ handleClose, passes, combo, movie }) => {
             .then(res => console.log('compra realizada', res.data))
             .catch(err => console.log(err))
     }
-
-
-    // useEffect(() => {
-    //     // Obtiene la ID de la sesión de pago del servidor
-    //     const sessionId = 'ID_DE_LA_SESION_DE_PAGO';
-
-    //     // Redirige al cliente a la página de pago de Stripe
-    //     const redirectToCheckout = async () => {
-    //         const stripe = await stripePromise;
-    //         const result = await stripe.redirectToCheckout({
-    //             sessionId,
-    //         });
-
-    //         if (result.error) {
-    //             // Maneja errores de redirección si es necesario
-    //             console.error(result.error);
-    //         }
-    //     };
-
-    //     redirectToCheckout();
-    // }, []);
 
 
     return (
@@ -108,7 +81,7 @@ const ConfirmOrder = ({ handleClose, passes, combo, movie }) => {
                         onClick={getTickets}
                     >
 
-                        <Link to={'https://buy.stripe.com/test_aEU29odBveMdbFm144'}>  Confirmar</Link>
+                        {/* <Link to={'https://buy.stripe.com/test_aEU29odBveMdbFm144'}>  Confirmar</Link> */}
                     </Button>
 
                 </Modal.Footer>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Container, Row } from 'react-bootstrap'
+import { Container, Spinner, Row } from 'react-bootstrap'
 import passService from "../../services/pass.services"
 
 import PassList from "../../components/PassList/PassList"
@@ -25,18 +25,22 @@ const PassListPage = () => {
 
     return (
         <Container>
-            <h1>Pases disponibles: </h1>
-            <hr />
-            <Row>
-                {
-                    !passes
-                        ?
-                        <h1>Loading...</h1>
-                        :
-                        <PassList fetchPasses={fetchPasses} passes={passes} />
-                }
+            {
+                !passes
+                    ? <div className='loader-container'><Spinner className='loader' animation="border" variant="light" /></div>
+                    :
+                    <Row>
+                        {
+                            !passes
+                                ?
+                                <h1>Loading...</h1>
+                                :
+                                <PassList fetchPasses={fetchPasses} passes={passes} />
+                        }
 
-            </Row>
+                    </Row>
+
+            }
         </Container>
     )
 }

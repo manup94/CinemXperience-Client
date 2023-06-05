@@ -72,7 +72,7 @@ button {
 }
 
 .top-movies {
-    width: 300px;
+    width: 200px;
 }
 
 .logout {
@@ -80,6 +80,18 @@ button {
     margin: 0;
 }
 
+.logout-margin {
+    margin: 20px;
+}
+
+
+.logout-container {
+    display: flex;
+    margin-left: 400px;
+    justify-content: center;
+    align-items: center;
+
+}
 
 .navbar.visible {
     transform: translateY(0);

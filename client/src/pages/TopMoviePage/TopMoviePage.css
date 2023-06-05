@@ -22,6 +22,15 @@
 
 }
 
+.button {
+    width: 200px;
+
+}
+
+.loader-container {
+    height: 100vh;
+}
+
 .details-container {
     text-align: center;
     border: white solid 3px;
