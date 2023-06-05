@@ -11,7 +11,7 @@ const UserMessage = () => {
             <Toast.Header>
                 <strong className="me-auto">Mensaje del sistema</strong>
             </Toast.Header>
-            <Toast.Body>{toastMessage}</Toast.Body>
+            <Toast.Body style={{ textAlign: 'center', fontSize: '1.8em' }}>{toastMessage}</Toast.Body>
         </Toast>
     )
 }
