@@ -11,8 +11,8 @@ import IndexPage from '../pages/IndexPage/IndexPage'
 // import IndexPage from '../pages/IndexPage/IndexPage'
 import MovieDetailsPage from '../pages/MovieDetailsPage/MovieDetailsPage'
 import EditProfileForm from '../pages/ProfileEditPage/ProfileEditPage'
-import TopRatedMovieList from '../pages/TopRatedMovieList/TopRatedMovieList'
 import TopMovieDetailsPage from '../pages/TopMovieDetailsPage/TopMovieDetailsPage'
+import TopMoviePage from '../pages/TopMoviePage/TopMoviePage'
 
 
 
@@ -23,12 +23,12 @@ const AppRoutes = () => {
             <Route path='/' element={<IndexPage />} />
             <Route path='/pass/:id' element={<h1>Sesiones especifica</h1>} />
             <Route path='/movies/:movie_id' element={<MovieDetailsPage />} />
+            <Route path='/TopRatedMovieList' element={<TopMoviePage />} />
             <Route path='/TopRatedMovie/:movie_id' element={<TopMovieDetailsPage />} />
             <Route path='/order' element={<h1>tu cesta</h1>} />
             <Route path='/combos' element={<ComboListPage />} />
             <Route path='/signup' element={<SignupPage />} />
             <Route path='/login' element={<LoginPage />} />
-            <Route path='/TopRatedMovieList' element={<TopRatedMovieList />} />
 
 
             <Route path='' element={<PrivateRoute admittedRoles={['USER', 'ADMIN']} />}>

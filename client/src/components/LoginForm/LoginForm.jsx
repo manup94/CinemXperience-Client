@@ -36,7 +36,7 @@ const LoginForm = () => {
             .then(({ data }) => {
                 storeToken(data.authToken)
                 authenticateUser()
-                emitMessage('Login correcto')
+                emitMessage('Sesión Iniciada')
                 navigate('/')
             })
             .catch(err => setErrors(err.response.data.errorMessages))

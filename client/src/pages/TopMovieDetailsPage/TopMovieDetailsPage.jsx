@@ -1,12 +1,16 @@
-import { Children, useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { AuthContext } from "../../context/auth.context"
+import profileService from "../../services/profile.services"
 import { useParams } from "react-router"
 import moviesServices from '../../services/movies.services'
-import { Col, Container, Row } from "react-bootstrap"
+import { Button, Col, Container, Row } from "react-bootstrap"
+import './TopMovieDetailsPage.css'
+import { MessageContext } from "../../context/message.context"
 const { formatDate } = require('../../utils/formatDate');
 
+const MovieDetailsPage = () => {
 
-const TopMovieDetailsPage = () => {
-
+    const { user } = useContext(AuthContext)
 
     const { movie_id } = useParams()
 
@@ -14,7 +18,7 @@ const TopMovieDetailsPage = () => {
 
     const [movie, setMovie] = useState({})
 
-
+    const { emitMessage } = useContext(MessageContext)
 
     useEffect(() => {
         oneMovieFetch()
@@ -27,30 +31,39 @@ const TopMovieDetailsPage = () => {
             .catch(err => console.log(err))
     }
 
+    const addToWatchlist = () => {
+        profileService
+            .AddWatchlistId(user._id, movie_id)
+            .then(() => {
+                emitMessage('Añadido a Watchlist')
+            })
+
+            .catch(err => console.log(err))
+    }
+
     return (
         <div className="full-container">
-            {
+            <Container className="d-flex mt-5 ">
+                <Col className=" img-container" >
+                    <Row>
+                        < img className="img image" src={`${baseImageUrl}${movie.poster_path}`} alt="movie-poster" />
+                    </Row>
 
-                <Container className="d-flex mt-5 ">
-                    <Col className=" img-container" >
-                        <Row>
-                            < img className="img image" src={`${baseImageUrl}${movie.poster_path}`} alt="movie-poster" />
-                        </Row>
+                </Col>
+                <Col className="details-container text-container">
+                    <Row className="d-flex movie-details">
+                        <h1 className="text">{movie.title}</h1>
+                        <p className="text">{movie.overview}</p>
+                        <p className="text">Fecha de estreno: {formatDate(movie.release_date)}</p>
+                        <p className="text">Puntuación media: {movie.vote_average}</p>
+                        <Button onClick={addToWatchlist} className="mt-5 btn btn-secondary" style={{ width: '150px' }}>Add to Watchlist</Button>
 
-                    </Col>
-                    <Col className="details-container text-container">
-                        <Row className="d-flex movie-details">
-                            <h1 className="text">{movie.title}</h1>
-                            <p className="text">{movie.overview}</p>
-                            <p className="text">Fecha de estreno: {formatDate(movie.release_date)}</p>
-                            <p className="text">Puntuación media: {movie.vote_average}</p>
+                    </Row>
+                </Col>
 
-                        </Row>
-                    </Col>
-                </Container >
-            }
+            </Container >
         </div>
     )
 }
 
-export default TopMovieDetailsPage
+export default MovieDetailsPage

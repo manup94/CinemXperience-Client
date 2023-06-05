@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom"
 import moviesService from "../../services/movies.services"
 import * as Collapsible from '@radix-ui/react-collapsible';
 import { RowSpacingIcon, Cross2Icon } from '@radix-ui/react-icons';
+import Loader from "../../components/Loader/Loader"
 const { formatDate } = require('../../utils/formatDate');
 
 const ProfilePage = () => {
@@ -14,6 +15,8 @@ const ProfilePage = () => {
     const { user } = useContext(AuthContext)
 
     const [profile, setProfile] = useState()
+
+    const [movie, setMovie] = useState([])
 
     const [pack, setPack] = useState([])
 
@@ -25,10 +28,10 @@ const ProfilePage = () => {
 
     const baseImageUrl = 'https://image.tmdb.org/t/p/original'
 
+    const basePosterUrl = 'https://image.tmdb.org/t/p/w200'
 
     useEffect(() => {
         getUserInfo()
-
     }, [])
 
 
@@ -38,6 +41,7 @@ const ProfilePage = () => {
             .getOneProfile(user._id)
             .then(({ data }) => {
                 setProfile(data);
+                getWatchlist(data.watchList) ///////
                 GetMovies(data.packs.map((pack) => {
                     console.log(pack.ticket);
                     return pack.ticket
@@ -45,7 +49,32 @@ const ProfilePage = () => {
 
             })
             .catch((err) => console.log(err));
-    };
+    }
+
+    const getWatchlist = (watchList) => {
+        const promises = watchList.map((movieId) =>
+            moviesService
+                .getOneMovie(movieId)
+        );
+
+        Promise.all(promises)
+            .then((responses) => {
+                const moviesData = responses.map(({ data }) => data);
+                setMovie(moviesData);
+            })
+            .catch((err) => console.log(err));
+    }
+
+    const removeMovieFromWatchlist = (movie_id) => {
+        profileService
+            .RemoveWatchlistId(user._id, movie_id)
+            .then(() => {
+                const updatedWatchlistMovies = movie.filter(movie => movie.id !== movie_id);
+                setMovie(updatedWatchlistMovies);
+            })
+            .catch(err => console.log(err))
+    }
+
 
     const GetMovies = (tickets) => {
         moviesService
@@ -65,7 +94,7 @@ const ProfilePage = () => {
             {
                 !profile
                     ?
-                    <h1>Hello there</h1>
+                    <Loader />
                     :
                     <>
                         <Container fluid>
@@ -140,11 +169,34 @@ const ProfilePage = () => {
 
                             </Row>
                         </Container>
+                        <Col xs={10} sm={8} md={6} lg={4}>
+                            <Card className="shadow">
+                                <Card.Body>
+                                    <Card.Title>Watchlist</Card.Title>
+                                    <Card.Text>
+                                        <div className="d-flex flex-wrap justify-content-center">
+                                            {movie.map((movie) => (
+                                                <Col xs={4} key={movie.id} className="m-2">
+                                                    <div className="movie-card">
+                                                        <img src={`${basePosterUrl}${movie.poster_path}`} alt="" />
+                                                        <div className="movie-title">{movie.title}</div>
+                                                        <Button onClick={() => removeMovieFromWatchlist(movie.id)}>Remove</Button>
+                                                    </div>
+                                                </Col>
+                                            ))}
+                                        </div>
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
                     </>
+
             }
-        </Container>
+        </Container >
 
     )
 }
 
 export default ProfilePage
+
+
