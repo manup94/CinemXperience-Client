@@ -21,9 +21,7 @@ class ProfileService {
         return this.api.put(`/${profile_id}/edit`, editedProfileData)
     }
 
-    getPackDetails(pack_id) {
-        return this.api.get(`/${pack_id}/getPackDetails`)
-    }
+
 }
 
 const profileService = new ProfileService()

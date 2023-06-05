@@ -52,8 +52,8 @@ const Navigation = () => {
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
-                            <Link to={'/combos'} className='nav-link'> Combos </Link>
+                        <Nav className="me-auto  navbar-edit">
+                            <Link to={'/combos'} className='nav-link '> Combos </Link>
                             <Link to={'/TopRatedMovieList'} className='nav-link'> Top Movies </Link>
                             {
                                 user?.role === 'ADMIN'

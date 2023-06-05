@@ -45,6 +45,7 @@ button {
 
 .navbar {
     position: fixed;
+
     top: 0;
     left: 0;
     width: 100%;
@@ -53,6 +54,32 @@ button {
     transition: transform 300ms ease;
     z-index: 100;
 }
+
+.navbar-edit {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 40px;
+
+
+}
+
+.navbar-text {
+    width: 200px;
+
+
+}
+
+.top-movies {
+    width: 300px;
+}
+
+.logout {
+    width: 100px;
+    margin: 0;
+}
+
 
 .navbar.visible {
     transform: translateY(0);

@@ -1,10 +1,11 @@
 import { useContext, useState } from "react"
 import { Form, Button } from "react-bootstrap"
 import authService from './../../services/auth.services'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { AuthContext } from "../../context/auth.context"
 import FormError from "../FormError/FormError"
 import { MessageContext } from "../../context/message.context"
+import './LoginForm.css'
 
 const LoginForm = () => {
 
@@ -45,28 +46,35 @@ const LoginForm = () => {
     const { password, email } = loginData
 
     return (
-
-        <Form onSubmit={handleSubmit}>
-
-
-            <Form.Group className="mb-3" controlId="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" value={email} onChange={handleInputChange} name="email" />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="password">
-                <Form.Label>Contraseña</Form.Label>
-                <Form.Control type="password" value={password} onChange={handleInputChange} name="password" />
-            </Form.Group>
+        <div className="form-container">
+            <Form className="form-card" onSubmit={handleSubmit}>
 
 
-            <div className="d-grid">
-                <Button variant="dark" type="submit">Acceder</Button>
-            </div>
+                <Form.Group className="mb-3 form-input" controlId="email">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control type="email" value={email} onChange={handleInputChange} name="email" />
+                </Form.Group>
 
-            {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
+                <Form.Group className="mb-3 form-input" controlId="password">
+                    <Form.Label>Contraseña</Form.Label>
+                    <Form.Control type="password" value={password} onChange={handleInputChange} name="password" />
+                </Form.Group>
 
-        </Form>
+
+                <div className="d-grid form-input">
+                    <Button variant="dark" type="submit">Acceder</Button>
+                </div>
+
+                <Link className="linkk" to={'/signup'}>Aun no tienes cuenta, click aqui</Link>
+
+                {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
+
+            </Form>
+
+        </div>
+
+
+
     )
 }
 

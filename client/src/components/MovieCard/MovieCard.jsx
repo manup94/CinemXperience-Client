@@ -10,7 +10,7 @@ const MovieCard = ({ moviesFetch, movie, _id }) => {
     return (
 
         <Card className='effect' style={{ width: '18rem' }}>
-            <Link className='title' to={`/TopRatedMovie/${movie.id}`}>
+            <Link className='title' to={`/movies/${movie.id}`}>
                 <Card style={{ width: '18rem' }}>
                     <Card.Img variant="top" src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} />
                     <Card.Body className='title-bg'>

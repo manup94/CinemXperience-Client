@@ -22,7 +22,6 @@ const AppRoutes = () => {
         <Routes>
             <Route path='/' element={<IndexPage />} />
             <Route path='/pass/:id' element={<h1>Sesiones especifica</h1>} />
-            <Route path='/pass/:id/buy' element={<h1>Sesiones Compra</h1>} />
             <Route path='/movies/:movie_id' element={<MovieDetailsPage />} />
             <Route path='/TopRatedMovie/:movie_id' element={<TopMovieDetailsPage />} />
             <Route path='/order' element={<h1>tu cesta</h1>} />
@@ -31,7 +30,7 @@ const AppRoutes = () => {
             <Route path='/login' element={<LoginPage />} />
             <Route path='/TopRatedMovieList' element={<TopRatedMovieList />} />
 
-            {/* TODO: REVISAR EN DISCORD TECNICA DE PROTECCION EN GRUPO */}
+
             <Route path='' element={<PrivateRoute admittedRoles={['USER', 'ADMIN']} />}>
                 <Route path='/profile' element={<ProfilePage />} />
                 <Route path='/profile/:profile_id/edit' element={<EditProfileForm />} />
@@ -40,8 +39,6 @@ const AppRoutes = () => {
             <Route path='' element={<PrivateRoute admittedRoles={['ADMIN']} />} >
                 <Route path='/admin/pass/create' element={<NewSessionPage />} />
                 <Route path='/admin/pass' element={<PassListPage />} />
-                <Route path='/admin/pass/edit' element={<h1>Pirata</h1>} />
-                <Route path='/admin/pass/delete' element={<h1>Pirata</h1>} />
                 <Route path='/admin/combo/create' element={<NewComboPage />} />
             </Route>
         </Routes>

@@ -21,6 +21,9 @@ class MoviesService {
         return this.api.get('/list/top_rated')
     }
 
+    GetMoviesFromTickets(tickets) {
+        return this.api.post('/populatedMoviesFromTickets', { tickets })
+    }
 }
 
 const moviesService = new MoviesService()

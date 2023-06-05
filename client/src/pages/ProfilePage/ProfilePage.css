@@ -1,3 +1,67 @@
-.img {
-    width: 50px;
+.profile-img {
+    width: 300px;
+}
+
+.movie-img {
+    width: 100%;
+    display: inline;
+    margin: 10px;
+}
+
+button {
+    all: unset;
+}
+
+.reset-link {
+    width: 100px;
+    height: 100px;
+    margin: 0;
+}
+
+.IconButton {
+    font-family: inherit;
+    border-radius: 100%;
+    height: 25px;
+    width: 25px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: green;
+    box-shadow: 0 2px 10px var(--blackA7);
+}
+
+.IconButton[data-state='closed'] {
+    background-color: white;
+}
+
+.IconButton[data-state='open'] {
+    background-color: white;
+}
+
+.IconButton:hover {
+    background-color: white;
+}
+
+.IconButton:focus {
+    box-shadow: 0 0 0 2px black;
+}
+
+.Text {
+    color: var(--violet11);
+    font-size: 15px;
+    line-height: 25px;
+}
+
+.Repository {
+    display: flex;
+    justify-content: space-around;
+    background-color: white;
+    border-radius: 4px;
+    margin: 20px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.7);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }

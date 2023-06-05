@@ -44,7 +44,7 @@ const IndexPage = () => {
 
     return (
         <>
-            <div>
+            <div className='search-bar'>
                 <SearchBar filterData={filterData} />
                 <hr />
             </div>
@@ -104,4 +104,9 @@ const IndexPage = () => {
 }
 
 export default IndexPage
+
+
+
+
+
 
