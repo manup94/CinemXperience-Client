@@ -2,6 +2,8 @@ import { useContext, useState } from "react"
 import { Button, Form, Modal } from "react-bootstrap"
 import { AuthContext } from "../../context/auth.context"
 import profileServices from '../../services/profile.services'
+import FormError from "../FormError/FormError";
+import { MessageContext } from "../../context/message.context";
 const { formatDate } = require('../../utils/formatDate');
 
 

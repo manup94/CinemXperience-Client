@@ -20,11 +20,9 @@ const AppRoutes = () => {
     return (
         <Routes>
             <Route path='/' element={<IndexPage />} />
-            <Route path='/pass/:id' element={<h1>Sesiones especifica</h1>} />
             <Route path='/movies/:movie_id' element={<MovieDetailsPage />} />
             <Route path='/TopRatedMovieList' element={<TopMoviePage />} />
             <Route path='/TopRatedMovie/:movie_id' element={<TopMovieDetailsPage />} />
-            <Route path='/order' element={<h1>tu cesta</h1>} />
             <Route path='/combos' element={<ComboListPage />} />
             <Route path='/signup' element={<SignupPage />} />
             <Route path='/login' element={<LoginPage />} />

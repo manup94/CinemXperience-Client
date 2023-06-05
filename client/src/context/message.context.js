@@ -14,6 +14,7 @@ function MessageProviderWrapper(props) {
 
     const closeToast = () => setShowToast(false)
 
+
     return (
         <MessageContext.Provider value={{ toastMessage, emitMessage, closeToast, showToast }}>
             {props.children}
