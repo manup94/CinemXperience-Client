@@ -22,12 +22,6 @@ const ProfilePage = () => {
 
     const [movies, setMovies] = useState({})
 
-<<<<<<< HEAD
-=======
-    const [open, setOpen] = useState(false);
-
-    const baseImageUrl = 'https://image.tmdb.org/t/p/original'
->>>>>>> b55bc0f64c3f6ef3acbcc1246789e11676b7e97d
 
     useEffect(() => {
         getUserInfo()
