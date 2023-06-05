@@ -17,8 +17,8 @@ class MoviesService {
         return this.api.get(`/movie/${id}`);
     }
 
-    getTopRated() {
-        return this.api.get('/list/top_rated')
+    getTopRated(page) {
+        return this.api.get(`/list/top_rated?page=${page}`)
     }
 
 }

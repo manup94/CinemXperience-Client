@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { Form, Button } from "react-bootstrap"
 import { useNavigate, useParams } from "react-router-dom"
-import authService from '../../services/auth.services'
 import FormError from "../FormError/FormError"
 import uploadServices from '../../services/upload.services';
 import profileService from "../../services/profile.services"
