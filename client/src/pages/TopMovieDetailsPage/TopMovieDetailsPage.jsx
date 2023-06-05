@@ -6,6 +6,8 @@ import moviesServices from '../../services/movies.services'
 import { Button, Col, Container, Row } from "react-bootstrap"
 import './TopMovieDetailsPage.css'
 import { MessageContext } from "../../context/message.context"
+import { Link } from "react-router-dom"
+import FormError from "../../components/FormError/FormError"
 const { formatDate } = require('../../utils/formatDate');
 
 const MovieDetailsPage = () => {
@@ -20,6 +22,8 @@ const MovieDetailsPage = () => {
 
     const { emitMessage } = useContext(MessageContext)
 
+    const [errors, setErrors] = useState([])
+
     useEffect(() => {
         oneMovieFetch()
     }, [])
@@ -32,14 +36,21 @@ const MovieDetailsPage = () => {
     }
 
     const addToWatchlist = () => {
+
         profileService
             .AddWatchlistId(user._id, movie_id)
-            .then(() => {
-                emitMessage('Añadido a Watchlist')
+            .then(({ data }) => {
+                if (data) {
+                    emitMessage('Añadido a Watchlist')
+                } else {
+                    emitMessage('Ya existe en tu Watchlist')
+                }
             })
-
             .catch(err => console.log(err))
+
     }
+
+
 
     return (
         <div className="full-container">
@@ -56,7 +67,15 @@ const MovieDetailsPage = () => {
                         <p className="text">{movie.overview}</p>
                         <p className="text">Fecha de estreno: {formatDate(movie.release_date)}</p>
                         <p className="text">Puntuación media: {movie.vote_average}</p>
-                        <Button onClick={addToWatchlist} className="mt-5 btn btn-secondary" style={{ width: '150px' }}>Add to Watchlist</Button>
+                        <div>
+                            {user
+                                ?
+                                (<Button onClick={addToWatchlist} className="mt-5 btn btn-secondary" style={{ width: '150px' }}>Add to Watchlist</Button>)
+                                :
+                                (<Link to={'/login'} className="sesions-form-btn"><Button>Por favor, inicia sesión para añadir a la Watchlist</Button></Link>)}
+
+                            {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
+                        </div>
 
                     </Row>
                 </Col>
@@ -67,3 +86,4 @@ const MovieDetailsPage = () => {
 }
 
 export default MovieDetailsPage
+

@@ -6,67 +6,59 @@ const { formatDate } = require('../../utils/formatDate');
 
 
 const ConfirmOrder = ({ handleClose, passes, combo, movie }) => {
+    const { user } = useContext(AuthContext);
 
-    const { user } = useContext(AuthContext)
-
-    const [selectCombo, setSelectCombo] = useState()
-
-    const [selectPass, setSelectPass] = useState()
+    const [selectCombo, setSelectCombo] = useState();
+    const [selectPass, setSelectPass] = useState();
+    const { emitMessage } = useContext(MessageContext);
+    const [errors, setErrors] = useState([]);
+    const [loading, setLoading] = useState(false); // Loading state
 
     const handlePassSelect = (event) => {
-
         const selectedPass = event.target.value;
         setSelectPass(selectedPass);
     };
 
     const handleComboSelect = (event) => {
-
         const selectedCombo = event.target.value;
         setSelectCombo(selectedCombo);
     };
 
-
     const getTickets = () => {
-
-        handleClose()
+        setLoading(true); // Set loading state to true
 
         profileServices
             .getTickets(user._id, { ticket: selectPass, combo: selectCombo })
-            .then(res => console.log('compra realizada', res.data))
-            .catch(err => console.log(err))
-    }
-
+            .then(({ data }) => {
+                emitMessage('Compra realizada');
+                setLoading(false); // Set loading state to false after success
+                handleClose();
+            })
+            .catch((err) => {
+                setErrors(err.response.data.errorMessages);
+                setLoading(false); // Set loading state to false after error
+            });
+    };
 
     return (
         <Modal.Body>
             <Form className="sesions-form d-block">
                 <p>Estas comprando entrada para la pelicula {movie.title}</p>
-                <Form.Select
-                    onChange={handlePassSelect}
-                    aria-label="Default select example" >
+                <Form.Select onChange={handlePassSelect} aria-label="Default select example">
                     <option>Selecciona una sesión disponible</option>
                     {passes.map((elm) => {
-
                         return (
                             <option key={elm._id} value={elm._id}>
-
-                                {
-                                    formatDate(elm.movieDate)
-                                }
+                                {formatDate(elm.movieDate)}
                             </option>
-
-                        )
-                    }
-                    )}
-
+                        );
+                    })}
                 </Form.Select>
-                <Form.Select
-                    onChange={handleComboSelect}
-                    aria-label="Default select example">
+                <Form.Select onChange={handleComboSelect} aria-label="Default select example">
                     <option>Selecciona un Combo</option>
                     {combo.map((elm) => {
                         return (
-                            <option key={elm._id} value={elm._id} >
+                            <option key={elm._id} value={elm._id}>
                                 {elm.name}
                             </option>
                         );
@@ -77,21 +69,21 @@ const ConfirmOrder = ({ handleClose, passes, combo, movie }) => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="dark"
-                        onClick={getTickets}
-                    >
 
-                        {/* <Link to={'https://buy.stripe.com/test_aEU29odBveMdbFm144'}>  Confirmar</Link> */}
-                    </Button>
-
+                    <div variant="dark" onClick={getTickets}>
+                        {loading ? (
+                            'Loading...'
+                        ) : (
+                            <>
+                                <Button style={{ textDecoration: 'none', color: 'white' }}>Confirmar</Button>
+                            </>
+                        )}
+                    </div>
+                    {errors.length > 0 && <FormError>{errors.map((elm) => <p>{elm}</p>)}</FormError>}
                 </Modal.Footer>
-
             </Form>
+        </Modal.Body>
+    );
+};
 
-
-        </Modal.Body >
-    )
-}
-
-
-export default ConfirmOrder
+export default ConfirmOrder;
