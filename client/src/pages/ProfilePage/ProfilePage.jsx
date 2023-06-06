@@ -35,13 +35,14 @@ const ProfilePage = () => {
                 setProfile(data);
                 getWatchlist(data.watchList)
                 GetMovies(data.packs.map((pack) => {
-                    console.log(pack.ticket);
                     return pack.ticket
                 }))
 
             })
             .catch((err) => console.log(err));
     }
+
+
 
     const getWatchlist = (watchList) => {
         const promises = watchList.map((movieId) =>

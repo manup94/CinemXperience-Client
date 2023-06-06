@@ -21,12 +21,13 @@ class MoviesService {
         return this.api.get(`/list/top_rated?page=${page}`)
     }
 
+
     GetMoviesFromTickets(tickets) {
         return this.api.post('/populatedMoviesFromTickets', { tickets })
     }
 
     GetFilteredMovies(genre_id, page) {
-        return this.api.get(`/list/top_rated/${genre_id}`, { page })
+        return this.api.get(`/list/top_rated/${genre_id}?page=${page}`)
     }
 }
 

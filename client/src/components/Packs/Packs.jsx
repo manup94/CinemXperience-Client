@@ -16,6 +16,7 @@ const Packs = ({ profile, movies }) => {
     const baseImageUrl = 'https://image.tmdb.org/t/p/original'
 
 
+
     return (
         <Col className="pack-container">
             <div className="d-flex mb-3 justify-content-center align-items-center text-center">
