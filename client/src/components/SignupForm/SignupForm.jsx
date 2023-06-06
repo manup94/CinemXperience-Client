@@ -32,7 +32,7 @@ const SignupForm = () => {
 
         authService
             .signup(signupData)
-            .then(({ data }) => {
+            .then(() => {
                 navigate('/profile')
                 emitMessage('Usuario creado')
             })
@@ -79,8 +79,6 @@ const SignupForm = () => {
                     <Form.Label>Imagen (URL)</Form.Label>
                     <Form.Control type="file" onChange={handleFileUpload} />
                 </Form.Group>
-
-
                 <div className="d-grid form-input ">
                     <Button variant="dark" type="submit">Registrarme</Button>
                 </div>

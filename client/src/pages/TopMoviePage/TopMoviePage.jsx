@@ -22,7 +22,6 @@ const TopMoviePage = () => {
             .then((res) => {
                 const titles = res.data.results
                 setMovieData(titles)
-                return titles;
             })
             .catch((err) => console.log(err));
     }
