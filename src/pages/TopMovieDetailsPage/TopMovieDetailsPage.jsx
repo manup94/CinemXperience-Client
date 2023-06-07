@@ -46,7 +46,6 @@ const MovieDetailsPage = () => {
             .AddWatchlistId(user._id, movie_id)
             .then(({ data }) => {
                 getUserInfo()
-                getOneProfile(user._id)
                 const message = data ? 'Añadido a Watchlist' : 'Ya existe en tu Watchlist'
                 emitMessage(message)
             })
@@ -89,7 +88,7 @@ const MovieDetailsPage = () => {
                     </Row>
 
                 </Col>
-                <Col className="details-container text-container">
+                <Col className="details-container text-container" >
                     <Row className="d-flex movie-details">
                         <h1 className="text">{movie.title}</h1>
                         <p className="text">{movie.overview}</p>
