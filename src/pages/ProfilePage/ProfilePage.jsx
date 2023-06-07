@@ -83,8 +83,9 @@ const ProfilePage = () => {
                     :
                     <>
                         <Row className="justify-content-center mt-4 mb-4">
-
-                            <ProfileInfo {...profile} />
+                            <Col>
+                                <ProfileInfo {...profile} />
+                            </Col>
                             <Col>
                                 <Packs profile={profile} movies={movies} removieFromWatchList />
                                 <hr />
