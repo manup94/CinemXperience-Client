@@ -9,6 +9,7 @@ import { MessageContext } from "../../context/message.context"
 import { Link } from "react-router-dom"
 import FormError from "../../components/FormError/FormError"
 import { BASE_IMAGE_URL } from "../../consts/movie-consts"
+import Comments from "../../components/Comments/Comments"
 const { formatDate } = require('../../utils/formatDate');
 
 
@@ -108,6 +109,7 @@ const MovieDetailsPage = () => {
 
                             {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
                         </div>
+                        <Comments movie_id={movie_id}></Comments>
 
                     </Row>
                 </Col>
