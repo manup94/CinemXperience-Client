@@ -24,11 +24,11 @@ const ComboCard = ({ name, snacks, drinks, _id, fetchCombos, price, image }) => 
 
         // TODO: QUITAR TODOS LOS style = {{ width: '18rem' }} DE LAS CARDS
 
-        <Card style={{ width: '18rem' }}>
+        <Card >
 
             <HoverCard.Root openDelay={0} closeDelay={0}>
                 <HoverCard.Trigger asChild>
-                    <Card style={{ width: '18rem' }}>
+                    <Card >
                         <Card.Img className='card-image' variant="top" src={image} />
                         <Card.Body className='title-bg'>
                             <Card.Title className='title'>{name}</Card.Title>
