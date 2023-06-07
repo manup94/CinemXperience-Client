@@ -28,6 +28,19 @@ const TopMoviePage = () => {
 
     }, [])
 
+    useEffect(() => {
+        if (!showGenre) {
+            moviesService
+                .getTopRated(page)
+                .then((res) => {
+                    const films = res.data.results
+                    setMovieData(films)
+
+                })
+                .catch((err) => console.log(err));
+        }
+    }, [page])
+
 
     useEffect(() => {
         if (showGenre) {
@@ -58,9 +71,6 @@ const TopMoviePage = () => {
         }
 
     }, [page])
-
-    console.log("-------", page, showGenre)
-
 
     const handleNextPage = () => {
         setPage(prevPage => prevPage + 1)
@@ -98,21 +108,26 @@ const TopMoviePage = () => {
             :
             <section>
                 <div className='container'>
-                    <button onClick={handleButton} value={28} className="mr-2 btn btn-secondary button " >Accion</button>
-                    <button onClick={handleButton} value={27} className="mr-2 btn btn-secondary button " >Terror</button>
-                    <button onClick={handleButton} value={16} className="mr-2 btn btn-secondary button " >Infantil</button>
-                    <button onClick={handleButton} value={18} className="mr-2 btn btn-secondary button " >Drama</button>
-                    <button onClick={allMovies} className="mr-2 btn btn-secondary button " >All</button>
+                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
+                        <button onClick={handleButton} value={28} className="mr-2 btn btn-secondary button" style={{ marginRight: '10px' }}>Accion</button>
+                        <button onClick={handleButton} value={27} className="mr-2 btn btn-secondary button" style={{ marginRight: '10px' }}>Terror</button>
+                        <button onClick={handleButton} value={16} className="mr-2 btn btn-secondary button" style={{ marginRight: '10px' }}>Infantil</button>
+                        <button onClick={handleButton} value={18} className="mr-2 btn btn-secondary button" style={{ marginRight: '10px' }}>Drama</button>
+                        <button onClick={allMovies} className="mr-2 btn btn-secondary button">All</button>
+                    </div>
 
                     <Row>
                         <TopMovieList movieData={movieData} />
                     </Row>
+
                     <div className="d-flex justify-content-center mt-5">
-                        <button className="mr-2 btn btn-secondary button " onClick={handlePreviousPage}>Pagina anterior</button>
+                        <button className="mr-2 btn btn-secondary button" onClick={handlePreviousPage}>Pagina anterior</button>
                         <div style={{ width: '50px' }}></div>
-                        <button className="btn btn-secondary button " style={{ marginLeft: 'auto' }} onClick={handleNextPage}>Pagina siguiente</button>
+                        <button className="btn btn-secondary button" style={{ marginLeft: 'auto' }} onClick={handleNextPage}>Pagina siguiente</button>
                     </div>
                 </div>
+
+
             </section>
 
 

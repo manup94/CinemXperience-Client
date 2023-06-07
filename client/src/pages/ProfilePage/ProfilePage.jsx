@@ -18,8 +18,6 @@ const ProfilePage = () => {
 
     const [movie, setMovie] = useState([])
 
-    const [pack, setPack] = useState([])
-
     const [movies, setMovies] = useState({})
 
 
@@ -41,8 +39,6 @@ const ProfilePage = () => {
             })
             .catch((err) => console.log(err));
     }
-
-
 
     const getWatchlist = (watchList) => {
         const promises = watchList.map((movieId) =>
@@ -91,8 +87,9 @@ const ProfilePage = () => {
                     :
                     <>
                         <Row className="justify-content-center mt-4 mb-4">
-
-                            <ProfileInfo profile={profile} />
+                            <Col>
+                                <ProfileInfo profile={profile} />
+                            </Col>
                             <Col>
                                 <Packs profile={profile} movies={movies} removieFromWatchList />
                                 <hr />
