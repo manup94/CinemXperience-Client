@@ -9,18 +9,16 @@ import { AuthContext } from "../../context/auth.context"
 import ConfirmOrder from "../../components/ConfirmOrder/ConfirmOrder"
 import { Link } from "react-router-dom"
 import Loader from "../../components/Loader/Loader"
+import { BASE_IMAGE_URL } from "../../consts/movie-consts"
 
 const { formatDate } = require('../../utils/formatDate');
 
 
 const MovieDetailsPage = () => {
 
-
     const { user } = useContext(AuthContext)
 
     const { movie_id } = useParams()
-
-    const baseImageUrl = 'https://image.tmdb.org/t/p/original'
 
     const [movie, setMovie] = useState({})
 
@@ -63,7 +61,6 @@ const MovieDetailsPage = () => {
             .getPassByMovie(movie_id)
             .then(res => setPasses(res.data))
             .catch((err) => console.log(err))
-
     }
 
     return (
@@ -73,12 +70,10 @@ const MovieDetailsPage = () => {
             :
             <div className="full-container">
 
-
-
                 <Container className="d-flex mt-5 ">
                     <Col className=" img-container" >
                         <Row>
-                            < img className="img image" src={`${baseImageUrl}${movie.poster_path}`} alt="movie-poster" />
+                            < img className="img image" src={`${BASE_IMAGE_URL}${movie.poster_path}`} alt="movie-poster" />
                         </Row>
 
                     </Col>

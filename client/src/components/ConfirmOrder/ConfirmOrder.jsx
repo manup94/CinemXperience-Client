@@ -60,10 +60,8 @@ const ConfirmOrder = ({ handleClose, passes, combo, movie }) => {
     const handlePayment = async () => {
         const stripe = await stripePromise()
 
-        const checkoutSession = await stripeServices
-            .createCheckoutSesion()
+        const checkoutSession = await stripeServices.createCheckoutSesion()
         const { sessionId } = checkoutSession.data
-        console.log(sessionId);
         const { error } = await stripe.redirectToCheckout({
             sessionId, // Reemplaza con el ID de sesión de pago generado en el backend
         });

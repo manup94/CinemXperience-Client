@@ -35,9 +35,9 @@ const NewComboForm = () => {
 
         comboService
             .createCombo(comboData)
-            .then(({ data }) => {
-                navigate('/combos')
+            .then(() => {
                 emitMessage('Se ha creado un nuevo combo')
+                navigate('/combos')
             })
             .catch(err => {
                 setErrors(err.response.data.errorMessages)

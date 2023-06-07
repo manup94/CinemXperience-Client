@@ -20,7 +20,6 @@ const ProfilePage = () => {
 
     const [movies, setMovies] = useState({})
 
-
     useEffect(() => {
         getUserInfo()
     }, [])
@@ -32,23 +31,20 @@ const ProfilePage = () => {
             .then(({ data }) => {
                 setProfile(data);
                 getWatchlist(data.watchList)
-                GetMovies(data.packs.map((pack) => {
-                    return pack.ticket
-                }))
-
+                GetMovies(data.packs.map((pack) => pack.ticket))
             })
             .catch((err) => console.log(err));
     }
 
-    const getWatchlist = (watchList) => {
-        const promises = watchList.map((movieId) =>
-            moviesService
-                .getOneMovie(movieId)
-        );
 
-        Promise.all(promises)
+    const getWatchlist = (watchList) => {
+
+        const promises = watchList.map((movieId) => moviesService.getOneMovie(movieId))
+
+        Promise
+            .all(promises)
             .then((responses) => {
-                const moviesData = responses.map(({ data }) => data);
+                const moviesData = responses.map(({ data }) => data)
                 setMovie(moviesData);
             })
             .catch((err) => console.log(err));
@@ -87,9 +83,8 @@ const ProfilePage = () => {
                     :
                     <>
                         <Row className="justify-content-center mt-4 mb-4">
-                            <Col>
-                                <ProfileInfo profile={profile} />
-                            </Col>
+
+                            <ProfileInfo {...profile} />
                             <Col>
                                 <Packs profile={profile} movies={movies} removieFromWatchList />
                                 <hr />

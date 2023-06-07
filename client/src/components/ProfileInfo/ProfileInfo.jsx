@@ -5,18 +5,18 @@ import { AuthContext } from "../../context/auth.context"
 import './ProfileInfo.css'
 
 
-const ProfileInfo = ({ profile }) => {
+const ProfileInfo = ({ avatar, username, email }) => {
 
     const { user } = useContext(AuthContext)
 
     return (
 
-        <Card className="shadow profile-img info-container" >
-            <Card.Img variant="top" src={profile.avatar} alt="Image" />
+        <Card className="shadow profile-img info-container ">
+            <Card.Img variant="top" src={avatar} alt="Image" />
             <Card.Body className="info-container">
-                <Card.Title className="text-center">{profile.username}</Card.Title>
+                <Card.Title className="text-center">{username}</Card.Title>
                 <Card.Text as="div">
-                    {profile.email}
+                    {email}
 
                     <div className='justify-content-end'>
                         <div style={{ display: 'flex', alignItems: 'center' }}>

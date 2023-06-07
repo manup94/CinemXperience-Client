@@ -8,8 +8,9 @@ import './TopMovieDetailsPage.css'
 import { MessageContext } from "../../context/message.context"
 import { Link } from "react-router-dom"
 import FormError from "../../components/FormError/FormError"
-import moviesService from "../../services/movies.services"
+import { BASE_IMAGE_URL } from "../../consts/movie-consts"
 const { formatDate } = require('../../utils/formatDate');
+
 
 const MovieDetailsPage = () => {
 
@@ -18,8 +19,6 @@ const MovieDetailsPage = () => {
     const [profile, setProfile] = useState()
 
     const { movie_id } = useParams()
-
-    const baseImageUrl = 'https://image.tmdb.org/t/p/original'
 
     const [movie, setMovie] = useState({})
 
@@ -43,19 +42,14 @@ const MovieDetailsPage = () => {
     }
 
     const addToWatchlist = () => {
-        if (user && user._id) {
-            profileService
-                .AddWatchlistId(user._id, movie_id)
-                .then(({ data }) => {
-                    getUserInfo()
-                    if (data) {
-                        emitMessage('Añadido a Watchlist')
-                    } else {
-                        emitMessage('Ya existe en tu Watchlist')
-                    }
-                })
-                .catch(err => console.log(err))
-        }
+        profileService
+            .AddWatchlistId(user._id, movie_id)
+            .then(({ data }) => {
+                const message = data ? 'Añadido a Watchlist' : 'Ya existe en tu Watchlist'
+                emitMessage(message)
+            })
+            .catch(err => console.log(err))
+
     }
 
     const getUserInfo = () => {
@@ -89,7 +83,7 @@ const MovieDetailsPage = () => {
             <Container className="d-flex mt-5 ">
                 <Col className=" img-container" >
                     <Row>
-                        < img className="img image" src={`${baseImageUrl}${movie.poster_path}`} alt="movie-poster" />
+                        < img className="img image" src={`${BASE_IMAGE_URL}${movie.poster_path}`} alt="movie-poster" />
                     </Row>
 
                 </Col>

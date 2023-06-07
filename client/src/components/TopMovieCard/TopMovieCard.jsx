@@ -2,17 +2,13 @@ import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './TopMovieCard.css'
 
-
-
-const TopMovieCard = ({ movie }) => {
-
+const TopMovieCard = ({ id, poster_path }) => {
 
     return (
-
         <Card className='effect' style={{ width: '18rem' }}>
-            <Link className='title' to={`/TopRatedMovie/${movie.id}`}>
-                <Card style={{ width: '18rem', height: '430px' }}>
-                    <Card.Img variant="top" src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} />
+            <Link className='title' to={`/TopRatedMovie/${id}`}>
+                <Card style={{ width: '18rem' }}>
+                    <Card.Img variant="top" src={`https://image.tmdb.org/t/p/original${poster_path}`} />
                     <Card.Body className='title-bg'>
                     </Card.Body>
                 </Card>

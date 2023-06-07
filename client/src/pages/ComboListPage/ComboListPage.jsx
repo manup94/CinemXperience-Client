@@ -34,7 +34,7 @@ const ComboListPage = () => {
                                 !combo ? (
                                     <h1>Loading...</h1>
                                 ) : (
-                                    <ComboList fetchCombos={fetchCombos} combo={combo} />
+                                    <ComboList fetchCombos={fetchCombos} combos={combo} />
                                 )
                             }
                         </Row>
