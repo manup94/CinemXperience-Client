@@ -2,8 +2,17 @@ import { useContext, useState } from "react"
 import { Button, Form, Modal } from "react-bootstrap"
 import { AuthContext } from "../../context/auth.context"
 import profileServices from '../../services/profile.services'
+import stripeServices from '../../services/stripe.services'
+
+
 import FormError from "../FormError/FormError";
 import { MessageContext } from "../../context/message.context";
+import { loadStripe } from '@stripe/stripe-js';
+
+
+const stripePromise = () => loadStripe('pk_test_51NEyyIIYMW6vfRer27ZHBgAsaItkKJ8HdwhQTgnwMEQxXBx5Nys8DKIknApk4I8qZFqBR8uLirhFuJ6xQq1rovvG00PnX7RUUO');
+
+
 const { formatDate } = require('../../utils/formatDate');
 
 
@@ -48,6 +57,25 @@ const ConfirmOrder = ({ handleClose, passes, combo, movie }) => {
             });
     };
 
+    const handlePayment = async () => {
+        const stripe = await stripePromise()
+
+        const checkoutSession = await stripeServices
+            .createCheckoutSesion()
+        const { sessionId } = checkoutSession.data
+        console.log(sessionId);
+        const { error } = await stripe.redirectToCheckout({
+            sessionId, // Reemplaza con el ID de sesión de pago generado en el backend
+        });
+
+        if (error) {
+            console.log('Error al redirigir a la página de pago:', error);
+        }
+    };
+
+
+
+
     return (
         <Modal.Body>
             <Form className="sesions-form d-block">
@@ -83,7 +111,7 @@ const ConfirmOrder = ({ handleClose, passes, combo, movie }) => {
                             'Loading...'
                         ) : (
                             <>
-                                <Button style={{ textDecoration: 'none', color: 'white' }}>Confirmar</Button>
+                                <Button onClick={handlePayment} style={{ textDecoration: 'none', color: 'white' }}>Confirmar</Button>
                             </>
                         )}
                     </div>
