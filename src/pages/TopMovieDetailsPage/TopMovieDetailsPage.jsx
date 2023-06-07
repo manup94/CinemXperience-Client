@@ -46,6 +46,7 @@ const MovieDetailsPage = () => {
             .AddWatchlistId(user._id, movie_id)
             .then(({ data }) => {
                 getUserInfo()
+                getOneProfile(user._id)
                 const message = data ? 'Añadido a Watchlist' : 'Ya existe en tu Watchlist'
                 emitMessage(message)
             })
