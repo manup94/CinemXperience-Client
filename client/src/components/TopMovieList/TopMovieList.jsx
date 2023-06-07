@@ -1,24 +1,20 @@
 import { Col } from "react-bootstrap"
 import TopMovieCard from "../TopMovieCard/TopMovieCard"
 
-
-const TopMovieList = ({ movieData }) => {
-
+const TopMovieList = ({ movies }) => {
 
     return (
         <>
-
             {
-                movieData?.map(elm => {
+                movies?.map(elm => {
                     return (
                         <Col md={{ span: 3 }} key={elm.id}>
-                            <TopMovieCard className="movies" movie={elm} />
+                            <TopMovieCard className="movies" {...elm} />
                         </Col>
                     )
                 })
 
             }
-
         </>
     )
 }

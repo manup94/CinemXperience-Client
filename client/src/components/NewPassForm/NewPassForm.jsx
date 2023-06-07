@@ -47,8 +47,8 @@ const NewPassForm = () => {
                 movieId: Number(passData.movieId)
             })
             .then(() => {
-                navigate('/')
                 emitMessage('Se ha creado una nueva sesion')
+                navigate('/')
             })
             .catch(err => {
                 setErrors(err.response.data.errorMessages)

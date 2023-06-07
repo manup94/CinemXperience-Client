@@ -7,22 +7,18 @@ import TopMovieList from "../../components/TopMovieList/TopMovieList"
 
 const TopMoviePage = () => {
 
-
     const [movieData, setMovieData] = useState()
 
     const [showGenre, setShowGenre] = useState(undefined)
 
     const [page, setPage] = useState(1)
 
-
-
     useEffect(() => {
         moviesService
             .getTopRated(1)
             .then((res) => {
-                const films = res.data.results
-                setMovieData(films)
-
+                const { results } = res.data
+                setMovieData(results)
             })
             .catch((err) => console.log(err));
 
@@ -35,8 +31,8 @@ const TopMoviePage = () => {
             moviesService
                 .GetFilteredMovies(showGenre, 1)
                 .then((res) => {
-                    const films = res.data.results
-                    setMovieData(films)
+                    const { results } = res.data
+                    setMovieData(results)
                 })
                 .catch((err) => console.log(err))
         }
@@ -50,8 +46,8 @@ const TopMoviePage = () => {
             moviesService
                 .GetFilteredMovies(showGenre, page)
                 .then((res) => {
-                    const films = res.data.results
-                    setMovieData(films)
+                    const { results } = res.data
+                    setMovieData(results)
                 })
                 .catch((err) => console.log(err))
 
@@ -59,12 +55,9 @@ const TopMoviePage = () => {
 
     }, [page])
 
-    console.log("-------", page, showGenre)
-
 
     const handleNextPage = () => {
         setPage(prevPage => prevPage + 1)
-
     }
 
     const handlePreviousPage = () => {
@@ -84,8 +77,8 @@ const TopMoviePage = () => {
         moviesService
             .getTopRated(1)
             .then((res) => {
-                const films = res.data.results
-                setMovieData(films)
+                const { results } = res.data
+                setMovieData(results)
             })
             .catch((err) => console.log(err));
     }
@@ -105,7 +98,7 @@ const TopMoviePage = () => {
                     <button onClick={allMovies} className="mr-2 btn btn-secondary button " >All</button>
 
                     <Row>
-                        <TopMovieList movieData={movieData} />
+                        <TopMovieList movies={movieData} />
                     </Row>
                     <div className="d-flex justify-content-center mt-5">
                         <button className="mr-2 btn btn-secondary button " onClick={handlePreviousPage}>Pagina anterior</button>

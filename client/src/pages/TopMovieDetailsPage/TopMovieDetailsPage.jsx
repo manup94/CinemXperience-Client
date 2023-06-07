@@ -8,15 +8,15 @@ import './TopMovieDetailsPage.css'
 import { MessageContext } from "../../context/message.context"
 import { Link } from "react-router-dom"
 import FormError from "../../components/FormError/FormError"
+import { BASE_IMAGE_URL } from "../../consts/movie-consts"
 const { formatDate } = require('../../utils/formatDate');
+
 
 const MovieDetailsPage = () => {
 
     const { user } = useContext(AuthContext)
 
     const { movie_id } = useParams()
-
-    const baseImageUrl = 'https://image.tmdb.org/t/p/original'
 
     const [movie, setMovie] = useState({})
 
@@ -36,15 +36,11 @@ const MovieDetailsPage = () => {
     }
 
     const addToWatchlist = () => {
-
         profileService
             .AddWatchlistId(user._id, movie_id)
             .then(({ data }) => {
-                if (data) {
-                    emitMessage('Añadido a Watchlist')
-                } else {
-                    emitMessage('Ya existe en tu Watchlist')
-                }
+                const message = data ? 'Añadido a Watchlist' : 'Ya existe en tu Watchlist'
+                emitMessage(message)
             })
             .catch(err => console.log(err))
 
@@ -57,7 +53,7 @@ const MovieDetailsPage = () => {
             <Container className="d-flex mt-5 ">
                 <Col className=" img-container" >
                     <Row>
-                        < img className="img image" src={`${baseImageUrl}${movie.poster_path}`} alt="movie-poster" />
+                        < img className="img image" src={`${BASE_IMAGE_URL}${movie.poster_path}`} alt="movie-poster" />
                     </Row>
 
                 </Col>
