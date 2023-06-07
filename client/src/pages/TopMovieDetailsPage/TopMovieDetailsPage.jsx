@@ -8,11 +8,14 @@ import './TopMovieDetailsPage.css'
 import { MessageContext } from "../../context/message.context"
 import { Link } from "react-router-dom"
 import FormError from "../../components/FormError/FormError"
+import moviesService from "../../services/movies.services"
 const { formatDate } = require('../../utils/formatDate');
 
 const MovieDetailsPage = () => {
 
     const { user } = useContext(AuthContext)
+
+    const [profile, setProfile] = useState()
 
     const { movie_id } = useParams()
 
@@ -20,12 +23,16 @@ const MovieDetailsPage = () => {
 
     const [movie, setMovie] = useState({})
 
+    const [watchlistMovies, setWatchlistMovies] = useState([])
+
     const { emitMessage } = useContext(MessageContext)
 
     const [errors, setErrors] = useState([])
 
+
     useEffect(() => {
         oneMovieFetch()
+        getUserInfo()
     }, [])
 
     const oneMovieFetch = () => {
@@ -36,21 +43,46 @@ const MovieDetailsPage = () => {
     }
 
     const addToWatchlist = () => {
-
-        profileService
-            .AddWatchlistId(user._id, movie_id)
-            .then(({ data }) => {
-                if (data) {
-                    emitMessage('Añadido a Watchlist')
-                } else {
-                    emitMessage('Ya existe en tu Watchlist')
-                }
-            })
-            .catch(err => console.log(err))
-
+        if (user && user._id) {
+            profileService
+                .AddWatchlistId(user._id, movie_id)
+                .then(({ data }) => {
+                    getUserInfo()
+                    if (data) {
+                        emitMessage('Añadido a Watchlist')
+                    } else {
+                        emitMessage('Ya existe en tu Watchlist')
+                    }
+                })
+                .catch(err => console.log(err))
+        }
     }
 
+    const getUserInfo = () => {
+        if (user && user._id) {
+            profileService
+                .getOneProfile(user._id)
+                .then(({ data }) => {
+                    setProfile(data);
+                    getWatchlist(data.watchList)
+                })
+                .catch((err) => console.log(err));
+        }
+    }
 
+    const getWatchlist = (watchList) => {
+        const promises = watchList.map((movieId) =>
+            moviesService
+                .getOneMovie(movieId)
+        );
+
+        Promise.all(promises)
+            .then((responses) => {
+                const moviesData = responses.map(({ data }) => data);
+                setWatchlistMovies(moviesData);
+            })
+            .catch((err) => console.log(err));
+    }
 
     return (
         <div className="full-container">
@@ -70,7 +102,11 @@ const MovieDetailsPage = () => {
                         <div>
                             {user
                                 ?
-                                (<Button onClick={addToWatchlist} className="mt-5 btn btn-secondary" style={{ width: '150px' }}>Add to Watchlist</Button>)
+                                (watchlistMovies.some(elm => elm.id == movie_id) ? (
+                                    <p className="mt-5">Ya está en tu Watchlist</p>
+                                ) : (
+                                    <Button onClick={addToWatchlist} className="mt-5 btn btn-secondary" style={{ width: '150px' }}>Add to Watchlist</Button>)
+                                )
                                 :
                                 (<Link to={'/login'} className="sesions-form-btn"><Button>Por favor, inicia sesión para añadir a la Watchlist</Button></Link>)}
 

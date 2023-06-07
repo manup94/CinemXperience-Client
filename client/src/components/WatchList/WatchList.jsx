@@ -39,7 +39,7 @@ const WatchList = ({ profile, movie, removeMovieFromWatchlist }) => {
                                                 <img src={`${baseImageUrl}${movie.poster_path}`} alt="movie-img" />
                                             </Link>
 
-                                            <Button onClick={() => removeMovieFromWatchlist(movie.id)}>Remove</Button>
+                                            <Button className="btn btn-secondary mt-3" onClick={() => removeMovieFromWatchlist(movie.id)}>Remove</Button>
                                         </div>
                                     </Col>
                                 ))}

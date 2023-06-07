@@ -11,7 +11,7 @@ const ProfileInfo = ({ profile }) => {
 
     return (
 
-        <Card className="shadow profile-img info-container ">
+        <Card className="shadow profile-img info-container" >
             <Card.Img variant="top" src={profile.avatar} alt="Image" />
             <Card.Body className="info-container">
                 <Card.Title className="text-center">{profile.username}</Card.Title>
