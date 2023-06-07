@@ -8,20 +8,17 @@ In this final bootcamp project, we are going to create a website for cinema plat
 
 Theres are the endpoints that we are going to use in our proyect:
 
-| URL | DESCRIPTION | PROTECTED |
-| --- | --- | --- |
-| / | Home page |  |
-| /sessions | List of available sessions|  |
-| session/:id |  Session details|  |
-| /session/:id/buy| Buy session | ✅|
-| /combos| List of combos | ✅ |
-| /order | View shopping - cart| ✅ |
-| /login | User login |  |
-| /signup | User signup |  |
-| /logout | User logout | ✅ |
-| /profile| View profile details | ✅ |
-| /admin/session/create| Admins create new session | ✅ |
-| /admin/session/edit | Admins edit new session| ✅ |
-| /admin/session/delete | Admins delete session | ✅ |
-| /admin/combo/create | Admin creates a new combo | ✅ |
-| /admin/combo/edit| Admin edits a combo | ✅ |
+| URL                       | DESCRIPTION                                                               | PROTECTED |
+| ------------------------- | ------------------------------------------------------------------------- | --------- |
+| /                         | Index page where users will see the movies that are screening in theaters |           |
+| /movies/:movie_id         | Movie that are in theaters details page                                   |           |
+| /TopRatedMovieList        | Top rated movie list                                                      |           |
+| /TopRatedMovie/:movie_id  | Top rated movie details                                                   |           |
+| /signup                   | User signup                                                               |           |
+| /login                    | User login                                                                |           |
+| /profile                  | View profile details                                                      | ✅         |
+| /profile/:profile_id/edit | User edits their profile information                                      | ✅         |
+| /admin/pass/create        | Admins create new pass                                                    | ✅         |
+| '/admin/pass'             | Pass list                                                                 | ✅         |
+| /admin/combo/create       | Admin creates a new combo                                                 | ✅         |
+| /combos                   | List of combos                                                            |           |

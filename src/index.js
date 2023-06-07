@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from '../../client/src/App';
+import App from '../src/App';
 import { BrowserRouter as Router } from 'react-router-dom'
 import { AuthProviderWrapper } from './context/auth.context';
 import { ThemeProviderWrapper } from './context/theme.context';

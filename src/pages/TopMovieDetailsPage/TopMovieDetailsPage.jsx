@@ -45,6 +45,7 @@ const MovieDetailsPage = () => {
         profileService
             .AddWatchlistId(user._id, movie_id)
             .then(({ data }) => {
+                getUserInfo()
                 const message = data ? 'Añadido a Watchlist' : 'Ya existe en tu Watchlist'
                 emitMessage(message)
             })
@@ -66,7 +67,7 @@ const MovieDetailsPage = () => {
 
     const getWatchlist = (watchList) => {
         const promises = watchList.map((movieId) =>
-            moviesService
+            moviesServices
                 .getOneMovie(movieId)
         );
 
