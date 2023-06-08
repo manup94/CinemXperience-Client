@@ -22,7 +22,6 @@ const ComboCard = ({ name, snacks, drinks, _id, fetchCombos, price, image }) => 
 
     return (
 
-        // TODO: QUITAR TODOS LOS style = {{ width: '18rem' }} DE LAS CARDS
 
         <Card >
 

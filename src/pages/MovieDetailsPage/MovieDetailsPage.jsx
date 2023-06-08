@@ -68,37 +68,39 @@ const MovieDetailsPage = () => {
         !movie.poster_path
             ? <Loader />
             :
-            <div className="full-container">
 
-                <Container className="d-flex mt-5 ">
+
+            <Container className="d-flex mt-5 ">
+                <Row>
+
                     <Col className=" img-container" >
-                        <Row>
-                            < img className="img image" src={`${BASE_IMAGE_URL}${movie.poster_path}`} alt="movie-poster" />
-                        </Row>
+
+                        < img className="img image" src={`${BASE_IMAGE_URL}${movie.poster_path}`} alt="movie-poster" />
 
                     </Col>
-                    <Col className="details-container text-container">
+                    <Col className="details-container  text-container">
                         <Row className="d-flex movie-details align-content-center">
                             <h1 className="text">{movie.title}</h1>
                             <p className="text">{movie.overview}</p>
                             <p className="text">Fecha de estreno: {formatDate(movie.release_date)}</p>
 
+
+                            {
+
+                                <div>
+                                    {user && passes.length !== 0 ? (
+                                        <Button onClick={handleShow} className="sesions-form-btn" variant="dark" >
+                                            Comprar entradas
+                                        </Button>
+                                    ) : passes.length === 0 ? (
+                                        <p className="no-sesions-form-btn" variant="danger">No hay sesiones disponibles</p>
+                                    ) : (
+                                        <Link to={'/login'} className="sesions-form-btn"><Button>Por favor, inicia sesión para comprar entradas</Button></Link>
+                                    )}
+                                </div>
+
+                            }
                         </Row>
-                        {
-
-                            <div>
-                                {user && passes.length !== 0 ? (
-                                    <Button onClick={handleShow} className="sesions-form-btn" variant="dark" >
-                                        Comprar entradas
-                                    </Button>
-                                ) : passes.length === 0 ? (
-                                    <p className="no-sesions-form-btn" variant="danger">No hay sesiones disponibles</p>
-                                ) : (
-                                    <Link to={'/login'} className="sesions-form-btn"><Button>Por favor, inicia sesión para comprar entradas</Button></Link>
-                                )}
-                            </div>
-
-                        }
 
                     </Col>
                     <>
@@ -117,12 +119,14 @@ const MovieDetailsPage = () => {
                         </Modal>
                     </>
 
+                </Row>
 
 
-                </Container >
+
+            </Container >
 
 
-            </div>
+
 
 
     )

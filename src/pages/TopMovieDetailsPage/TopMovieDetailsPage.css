@@ -20,12 +20,17 @@
     text-align: center;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+
+
 
 }
 
 .details-container {
+    font-size: 0.9em;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: white solid 3px;
     border-radius: 13px;
     box-shadow: 7px 7px 12px white;
@@ -49,6 +54,11 @@
 
 .text {
     margin: 15px;
+}
+
+.reset {
+    margin: 0;
+
 }
 
 .no-sesions-form-btn {

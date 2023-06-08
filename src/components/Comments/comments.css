@@ -1,0 +1,39 @@
+.comments-container {
+
+    display: flex;
+    flex-direction: column;
+    color: white;
+    border: white solid 3px;
+    border-radius: 13px;
+    box-shadow: 7px 7px 12px white;
+    justify-content: space-between;
+    background-image: url('/public/chat-bg.jpg');
+    background-size: 50%;
+    height: 600px;
+    width: 300px;
+    display: flex;
+}
+
+.comments {
+    flex: 1;
+    margin-top: 10px;
+
+}
+
+.comments-form {
+    height: 100px;
+}
+
+.comments {
+    overflow-y: scroll;
+    height: calc(100% - 60px);
+
+
+}
+
+.comment {
+    margin-bottom: 10px;
+    background-color: #e6ffdc;
+    border-radius: 14px;
+    color: black;
+}

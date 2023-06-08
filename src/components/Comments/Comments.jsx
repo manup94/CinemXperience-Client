@@ -1,8 +1,10 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { AuthContext } from "../../context/auth.context"
-import { Form, Button } from "react-bootstrap"
+import { Form, Button, Col } from "react-bootstrap"
 import commentServices from "../../services/comments.services"
 import profileService from "../../services/profile.services"
+import Loader from "../../components/Loader/Loader"
+import './comments.css'
 
 
 const Comments = ({ movie_id }) => {
@@ -14,6 +16,18 @@ const Comments = ({ movie_id }) => {
     })
 
     const [comments, setComments] = useState([])
+
+    const commentsContainerRef = useRef(null);
+
+
+
+    useEffect(() => {
+        // Hacer scroll hacia abajo cuando se agrega un nuevo comentario
+        if (commentsContainerRef.current) {
+            commentsContainerRef.current.scrollTop = commentsContainerRef.current.scrollHeight;
+        }
+    }, [comments]);
+
 
 
     useEffect(() => {
@@ -31,7 +45,10 @@ const Comments = ({ movie_id }) => {
 
         commentServices
             .AddComment(movie_id, comment, user._id)
-            .then(() => getAllComments())
+            .then(() => {
+                getAllComments()
+                setComment({ comment: '' })
+            })
             .catch(err => console.log(err))
     }
 
@@ -47,38 +64,37 @@ const Comments = ({ movie_id }) => {
 
 
     return (
-        <div>
-            <div>
-                {
 
-                    comments
-                        ?.filter(comentario => comentario.movieId === movie_id)
-                        .map(comentario => (
-                            <div key={comentario._id}>
-                                <p>{comentario.owner.username}</p>
-                                <p>{comentario.message}</p>
-                            </div>
-                        ))
-                }
+        <Col className="comments-container m-5">
+            <div ref={commentsContainerRef} className="comments" style={{ maxHeight: '470px', overflowY: 'scroll' }}>
+                {comments
+                    ?.filter(comentario => comentario.movieId === movie_id)
+                    .map(comentario => (
+                        <div className="comment" key={comentario._id}>
+                            <p>{comentario.message}</p>
+                            <p>{comentario.owner.username}</p>
+                        </div>
+                    ))}
             </div>
-            {
-                user &&
-                <Form className='Comment-form' onSubmit={handleSubmit}>
+            {user && (
+                <Form className="comments-form" onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="comment">
-                        <Form.Label>Comentario</Form.Label>
-                        <Form.Control type="text"
+                        <Form.Control
+                            type="text"
                             placeholder="Introduce un comentario"
                             value={comment.comment}
                             onChange={handleInputChange}
-                            name='comment'
+                            name="comment"
                         />
                     </Form.Group>
                     <Button variant="dark" type="submit">
                         Comentar
                     </Button>
                 </Form>
-            }
-        </div>
+            )}
+        </Col>
+
+
     )
 
 }

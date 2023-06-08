@@ -7,6 +7,7 @@ import { Button, Col, Container, Row } from "react-bootstrap"
 import './TopMovieDetailsPage.css'
 import { MessageContext } from "../../context/message.context"
 import { Link } from "react-router-dom"
+import Loader from "../../components/Loader/Loader"
 import FormError from "../../components/FormError/FormError"
 import { BASE_IMAGE_URL } from "../../consts/movie-consts"
 import Comments from "../../components/Comments/Comments"
@@ -81,40 +82,46 @@ const MovieDetailsPage = () => {
     }
 
     return (
-        <div className="full-container">
-            <Container className="d-flex mt-5 ">
-                <Col className=" img-container" >
+        !movie.poster_path
+            ? <Loader />
+            :
+            <div className="full-container">
+                <Container className="d-flex  ">
                     <Row>
-                        < img className="img image" src={`${BASE_IMAGE_URL}${movie.poster_path}`} alt="movie-poster" />
-                    </Row>
+                        <Col className="m-5 " >
 
-                </Col>
-                <Col className="details-container text-container" >
-                    <Row className="d-flex movie-details">
-                        <h1 className="text">{movie.title}</h1>
-                        <p className="text">{movie.overview}</p>
-                        <p className="text">Fecha de estreno: {formatDate(movie.release_date)}</p>
-                        <p className="text">Puntuación media: {movie.vote_average}</p>
-                        <div>
-                            {user
-                                ?
-                                (watchlistMovies.some(elm => elm.id == movie_id) ? (
-                                    <p className="mt-5">Ya está en tu Watchlist</p>
-                                ) : (
-                                    <Button onClick={addToWatchlist} className="mt-5 btn btn-secondary" style={{ width: '150px' }}>Add to Watchlist</Button>)
-                                )
-                                :
-                                (<Link to={'/login'} className="sesions-form-btn"><Button>Por favor, inicia sesión para añadir a la Watchlist</Button></Link>)}
+                            < img style={{ width: '100%' }} src={`${BASE_IMAGE_URL}${movie.poster_path}`} alt="movie-poster" />
 
-                            {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
-                        </div>
+
+                        </Col>
+                        <Col className="details-container m-5 flex-column text-container" >
+
+                            <h1 style={{ marginBottom: '50px' }}>{movie.title}</h1>
+                            <p className="">{movie.overview}</p>
+                            <p className="">Fecha de estreno: {formatDate(movie.release_date)}</p>
+                            <p className="">Puntuación media: {movie.vote_average}</p>
+                            <div style={{ marginTop: '50px' }}>
+                                {user
+                                    ?
+                                    (watchlistMovies.some(elm => elm.id == movie_id) ? (
+                                        <p >Ya está en tu Watchlist</p>
+                                    ) : (
+                                        <Button onClick={addToWatchlist} className=" btn btn-secondary" style={{ width: '150px' }}>Add to Watchlist</Button>)
+                                    )
+                                    :
+                                    (<Link to={'/login'} className="sesions-form-btn"><Button>Por favor, inicia sesión para añadir a la Watchlist</Button></Link>)}
+
+                                {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
+                            </div>
+
+
+                        </Col>
                         <Comments movie_id={movie_id}></Comments>
 
                     </Row>
-                </Col>
 
-            </Container >
-        </div>
+                </Container >
+            </div>
     )
 }
 

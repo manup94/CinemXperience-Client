@@ -95,7 +95,7 @@ const TopMoviePage = () => {
             })
             .catch((err) => console.log(err));
     }
-
+    console.log(movieData);
 
     return (
 
