@@ -14,26 +14,37 @@
     display: flex;
 }
 
-.comments {
-    flex: 1;
-    margin-top: 10px;
 
+.userText {
+    text-align: right;
+    margin-right: 10px;
+}
+
+.comment-text {
+    margin-top: 20px;
 }
 
 .comments-form {
     height: 100px;
+    flex: 1;
+    margin-top: 10px;
 }
 
 .comments {
+
     overflow-y: scroll;
     height: calc(100% - 60px);
-
 
 }
 
 .comment {
-    margin-bottom: 10px;
+
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+    margin-bottom: 20px;
     background-color: #e6ffdc;
     border-radius: 14px;
     color: black;
+    word-break: break-word;
 }

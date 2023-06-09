@@ -9,7 +9,7 @@ const MoviesList = ({ movieData, moviesFetch }) => {
     return (
         movieData.map(elm => {
             return (
-                <Col md={{ span: 3 }} key={elm.id}>
+                <Col sm={{ span: 5 }} md={{ span: 3 }} key={elm.id}>
                     <MovieCard className="movies" movie={elm} moviesFetch={moviesFetch} />
 
                 </Col>

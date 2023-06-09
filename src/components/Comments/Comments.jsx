@@ -71,8 +71,8 @@ const Comments = ({ movie_id }) => {
                     ?.filter(comentario => comentario.movieId === movie_id)
                     .map(comentario => (
                         <div className="comment" key={comentario._id}>
-                            <p>{comentario.message}</p>
-                            <p>{comentario.owner.username}</p>
+                            <p className="comment-text">{comentario.message}</p>
+                            <p className="userText">{comentario.owner.username}</p>
                         </div>
                     ))}
             </div>

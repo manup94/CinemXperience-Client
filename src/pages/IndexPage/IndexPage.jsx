@@ -1,4 +1,4 @@
-import { Carousel, Spinner, Row, Col } from 'react-bootstrap'
+import { Carousel, Spinner, Row, Col, Container } from 'react-bootstrap'
 import { useState, useEffect } from 'react';
 import moviesService from '../../services/movies.services';
 import MoviesList from '../../components/MoviesList/MoviesList';
@@ -43,12 +43,14 @@ const IndexPage = () => {
 
 
     return (
-        <div className='index-container'>
-            <div className='search-bar d-flex'>
-                <img className="search " src="../../../search.png" alt="ticket" />
-                <SearchBar filterData={filterData} />
-                <hr />
-            </div>
+        <Container className='index-container'>
+            <Row className='search-bar d-flex'>
+                <Col >
+
+                    <SearchBar filterData={filterData} />
+                </Col>
+
+            </Row>
             {
 
                 movieData.length === 0
@@ -56,13 +58,13 @@ const IndexPage = () => {
                     :
                     <>
 
-                        <header className='carrousel-container'>
-                            <div className='text-container'>
+                        <Row className='carrousel-container'>
+                            <Col className='text-container '>
                                 <h1>CinemXperience</h1>
                                 <p className='slogan'>Vive el lujo del cine de primera clase con CinemXperience, donde la comodidad,
                                     la tecnología de vanguardia y las mejores películas se unen en un solo lugar.</p>
-                            </div>
-                            <Carousel className='carrousel-all'>
+                            </Col>
+                            <Carousel as={Col} className='carrousel-all'>
                                 {
                                     sliderMovies.map(elm => {
                                         return (
@@ -84,20 +86,20 @@ const IndexPage = () => {
 
                             </Carousel>
 
-                        </header >
+                        </Row >
                         <section>
 
-                            <div className='container'>
+                            <Container >
 
-                                <Row>
+                                <Row className='justify-content-center'>
                                     <MoviesList moviesFetch={moviesFetch} movieData={movieData} />
                                 </Row>
-                            </div>
+                            </Container>
 
                         </section>
                     </>
             }
-        </div>
+        </Container>
 
 
 
